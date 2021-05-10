@@ -13,6 +13,8 @@ The purpose of this project is to show users how to pair the ESP32 development b
 
 ## Hardware Setup
 
+![Pinout](images/nsf_edu_diagram.jpg)
+
 | **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
 | 1 (VDD) | - |
