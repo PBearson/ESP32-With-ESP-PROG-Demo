@@ -13,6 +13,10 @@ The purpose of this project is to show users how to pair the ESP32 development b
 
 ## Hardware Setup
 
+| ESP-PROG pin | ESP32 pin |
+| - | - |
+| 1 | 1 |
+
 Wiring, hardware, etc.
 
 ## Software Setup
