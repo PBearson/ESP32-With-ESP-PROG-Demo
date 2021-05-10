@@ -15,4 +15,4 @@ TODO ESP-IDF, project example, etc.
 
 ## Testing JTAG
 
-TODO
+TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
