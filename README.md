@@ -1,5 +1,5 @@
 # ESP32-With-ESP-PROG-Demo
-Debug your embedded software with ESP32, ESP-PROG, and JTAG.
+Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is part of a course at University of Massachusetts Lowell, and some details may need to be changed to work for other readers.
 
 ## Overview
 
@@ -9,9 +9,7 @@ See below for a look at how our custom ESP32 board may connect to ESP-PROG:
 
 ![Setup Demo](images/setup-demo.jpg)
 
-TODO Show picture of setup, describe how it works
-
-
+The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **Provision-ECC608** sample project which generates a key pair and CSR on the ATECC608A crypto chip, which is included on our development board. We will perform some simple debugging tasks on this project as a demonstration.
 
 ## Hardware Setup
 
