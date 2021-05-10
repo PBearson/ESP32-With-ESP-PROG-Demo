@@ -13,9 +13,18 @@ The purpose of this project is to show users how to pair the ESP32 development b
 
 ## Hardware Setup
 
-| ESP-PROG pin | ESP32 pin |
+| **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
-| 1 | 1 |
+| 1 (VDD) | - |
+| 2 (TMS) | 14 |
+| 3 (GND) | GND |
+| 4 (TCK) | 13 |
+| 5 (GND) | - |
+| 6 (TDO) | 15 |
+| 7 (GND) | - |
+| 8 (TDI) | 12 |
+| 9 (GND) | - |
+| 10 (NC) | - |
 
 Wiring, hardware, etc.
 
