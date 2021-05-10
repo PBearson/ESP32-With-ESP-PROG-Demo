@@ -3,6 +3,8 @@ Debug your embedded software with ESP32, ESP-PROG, and JTAG.
 
 ## Overview
 
+![Setup Demo](images/setup-demo.jpg)
+
 TODO Show picture of setup, describe how it works
 
 ## Hardware Setup
