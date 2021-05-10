@@ -16,3 +16,11 @@ TODO ESP-IDF, project example, etc.
 ## Testing JTAG
 
 TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
+
+### Command Line
+
+TODO
+
+### VS Code
+
+TODO
