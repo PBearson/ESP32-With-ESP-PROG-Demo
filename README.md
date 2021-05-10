@@ -13,7 +13,19 @@ The purpose of this project is to show users how to pair the ESP32 development b
 
 ## Hardware Setup
 
+You will need the following hardware to complete this project:
+
+* An ESP32-WROOM-32 development board, such as our custom board
+* ESP-PROG
+* 2 USB cables
+* At least 5 female-to-female jumper wires
+* Optionally, a USB hub with at least 2 ports
+
+ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered and labeled in the figure below: 
+
 ![Pinout](images/nsf_edu_diagram.jpg)
+
+To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that five of the pins on the headers will go unused.
 
 | **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
