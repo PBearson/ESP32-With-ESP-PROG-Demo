@@ -48,6 +48,33 @@ If you have multiple open ports on your computer, you do not need the USB hub. F
 
 ## Software Setup
 
+Make sure you have ESP-IDF installed on your computer. Download this repository with the following command:
+
+```
+git clone --recursive https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
+```
+
+After connecting your devices to the computer, make sure your Operating System can see them. In VirtualBox, you should attach the USB controllers to your virtual machine:
+
+* UART: Enable **Devices -> USB -> Silicon Labs CP2102 USB to UART Bridge Controller**
+* JTAG: Enable **Devices -> USB -> FTDI Dual RS232-HS**
+
+ESP-PROG's controller (FTDI Dual) contains 2 separate USB interfaces, while the ESP32's controller (CP2102) has a single interface; this means that 3 ports will become accessible when you attach both controllers. Most likely, these will show up under **/dev/ttyUSB\***. To find all attached USB devices, run the following command:
+
+```
+find /dev/ -name ttyUSB*
+```
+
+It is helpful to know which port belongs to which interface. To see the interface of a given port, run the following command:
+
+```
+udevadm info -a -p  $(udevadm info -q path -n <device>) | grep "{interface}"
+```
+
+Replace __<device>__ with __/dev/ttyUSB0__, __/dev/ttyUSB1__, etc. A demonstration of this can be seen below:
+
+![USB Information](images/usb_info.JPG)
+
 TODO ESP-IDF, project example, etc.
 
 ## Testing JTAG
