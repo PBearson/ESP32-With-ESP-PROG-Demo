@@ -21,7 +21,7 @@ You will need the following hardware to complete this project:
 * At least 5 female-to-female jumper wires
 * Optionally, a USB hub with at least 2 ports
 
-ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered and labeled in the figure below: 
+ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
 ![Pinout](images/nsf_edu_diagram.jpg)
 
@@ -40,7 +40,11 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fiv
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-Wiring, hardware, etc.
+To connect the devices to your host computer, you can connect the devices to a USB hub and connect the hub to the computer. See the following image for a demonstration:
+
+![Arch](images/nsf_edu.jpg) 
+
+If you have multiple open ports on your computer, you do not need the USB hub. Furthermore, the ESP-PROG contains a UART header which can be used to communicate with the ESP32 over UART without the need for a second USB cable.
 
 ## Software Setup
 
