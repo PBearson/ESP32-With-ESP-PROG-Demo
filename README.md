@@ -71,7 +71,7 @@ It is helpful to know which port belongs to which interface. To see the interfac
 udevadm info -a -p  $(udevadm info -q path -n <device>) | grep "{interface}"
 ```
 
-Replace __<device>__ with __/dev/ttyUSB0__, __/dev/ttyUSB1__, etc. A demonstration of this can be seen below:
+Replace _\<device\>_ with _/dev/ttyUSB0_, _/dev/ttyUSB1_, etc. A demonstration of this can be seen below:
 
 ![USB Information](images/usb_info.JPG)
 
