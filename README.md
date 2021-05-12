@@ -59,13 +59,13 @@ After connecting your devices to the computer, make sure your Operating System c
 * UART: Enable **Devices -> USB -> Silicon Labs CP2102 USB to UART Bridge Controller**
 * JTAG: Enable **Devices -> USB -> FTDI Dual RS232-HS**
 
-ESP-PROG's controller (FTDI Dual) contains 2 separate USB interfaces, while the ESP32's controller (CP2102) has a single interface; this means that 3 ports will become accessible when you attach both controllers. Most likely, these will show up under **/dev/ttyUSB\***. To find all attached USB devices, run the following command:
+ESP-PROG's controller (FTDI Dual) contains 2 separate USB interfaces, while the ESP32's controller (CP2102) has a single interface; this means that 3 USB devices will become accessible when you attach both controllers. Most likely, these will show up under **/dev/ttyUSB\***. To find all attached USB devices, run the following command:
 
 ```
 find /dev/ -name ttyUSB*
 ```
 
-It is helpful to know which port belongs to which interface. To see the interface of a given port, run the following command:
+It is helpful to know which USB device belongs to which interface. To see the interface of a given device, run the following command:
 
 ```
 udevadm info -a -p  $(udevadm info -q path -n <device>) | grep "{interface}"
