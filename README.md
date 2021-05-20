@@ -75,7 +75,15 @@ Replace _\<device\>_ with _/dev/ttyUSB0_, _/dev/ttyUSB1_, etc. A demonstration o
 
 ![USB Information](images/usb_info.JPG)
 
-TODO ESP-IDF, project example, etc.
+Now it is time to get the application ready so we can debug it. Navigate to the _esp32-ecc608-dht22-st7735_ directory. Run the following command to build and upload the app to the board:
+
+```
+idf.py -p <device> build flash monitor
+```
+
+Replace  _\<device\>_ with the device associated with the CP2102 controller, such as _\/dev\/ttyUSB0_.
+
+The USB cable connected to the ESP32 can communicate with the board via UART.
 
 ## Testing JTAG
 
