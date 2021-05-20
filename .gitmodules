@@ -1,3 +1,7 @@
 [submodule "Provision-ECC608"]
 	path = Provision-ECC608
 	url = https://github.com/PBearson/Provision-ECC608.git
+
+[submodule "esp32-ecc608-dht22-st7735"]
+	path = esp32-ecc608-dht22-st7735
+	url = https://github.com/PBearson/esp32-ecc608-dht22-st7735.git
