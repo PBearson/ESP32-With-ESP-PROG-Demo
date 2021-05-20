@@ -9,7 +9,7 @@ See below for a look at how our custom ESP32 board may connect to ESP-PROG:
 
 ![Setup Demo](images/setup-demo.jpg)
 
-The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **Provision-ECC608** sample project which generates a key pair and CSR on the ATECC608A crypto chip, which is included on our development board. We will perform some simple debugging tasks on this project as a demonstration.
+The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **esp32-ecc608-dht22-st7735** sample project which showcases the capabilities of the sensors on our development board. We will perform some simple debugging tasks on this project as a demonstration.
 
 ## Hardware Setup
 
