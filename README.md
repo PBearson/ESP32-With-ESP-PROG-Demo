@@ -17,7 +17,7 @@ You will need the following hardware to complete this project:
 
 * An ESP32-WROOM-32 development board, such as our custom board
 * ESP-PROG
-* 1 USB cables
+* 1 USB cable
 * At least 6 female-to-female jumper wires
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
@@ -43,7 +43,7 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 ![Arch](images/nsf_edu.jpg) 
 
-You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities fo uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
+You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
 ## Software Setup
 
@@ -53,7 +53,7 @@ Make sure you have ESP-IDF installed on your computer. Download this repository 
 git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
 ```
 
-After connecting your devices to the computer, make sure your Operating System can see them. In VirtualBox, you should attach the following USB controller to your virtual machine:
+After connecting your devices to the computer, make sure your Operating System can the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
