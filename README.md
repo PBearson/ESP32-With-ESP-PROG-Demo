@@ -94,4 +94,6 @@ openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin
 idf.py openocd gdb
 ```
 
+If the above command does not launch the GDB session, you may need to press the **EN** button on your development board first, and then try the command again.
+
 TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
