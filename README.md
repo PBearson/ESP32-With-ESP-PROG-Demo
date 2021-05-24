@@ -75,16 +75,23 @@ Replace _\<device\>_ with _/dev/ttyUSB0_, _/dev/ttyUSB1_, etc. A demonstration o
 
 ![USB Information](images/usb_info.JPG)
 
-Now it is time to get the application ready so we can debug it. Navigate to the _esp32-ecc608-dht22-st7735_ directory. Run the following command to build and upload the app to the board:
+Now it is time to get the application ready so we can debug it. Navigate to the _hello_world_ directory. Run the following command to build the app:
 
 ```
-idf.py -p <device> build flash monitor
+idf.py build
 ```
 
-Replace  _\<device\>_ with the device associated with the CP2102 controller, such as _\/dev\/ttyUSB0_.
+Now use JTAG to upload the app to the board:
 
-The USB cable connected to the ESP32 can communicate with the board via UART.
+```
+openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+```
 
 ## Testing JTAG
+
+
+```
+idf.py openocd gdb
+```
 
 TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
