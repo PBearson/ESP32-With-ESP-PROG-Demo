@@ -24,7 +24,7 @@ ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For
 
 ![Pinout](images/nsf_edu_diagram.jpg)
 
-To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that five of the pins on the headers will go unused.
+To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
 | **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
@@ -39,40 +39,23 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fiv
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-To connect the devices to your host computer, you can connect the devices to a USB hub and connect the hub to the computer. See the following image for a demonstration:
+To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. See the following image for a demonstration:
 
 ![Arch](images/nsf_edu.jpg) 
 
-If you have multiple open ports on your computer, you do not need the USB hub. Furthermore, the ESP-PROG contains a UART header which can be used to communicate with the ESP32 over UART without the need for a second USB cable.
+You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities fo uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
 ## Software Setup
 
 Make sure you have ESP-IDF installed on your computer. Download this repository with the following command:
 
 ```
-git clone --recursive https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
+git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
 ```
 
-After connecting your devices to the computer, make sure your Operating System can see them. In VirtualBox, you should attach the USB controllers to your virtual machine:
+After connecting your devices to the computer, make sure your Operating System can see them. In VirtualBox, you should attach the following USB controller to your virtual machine:
 
-* UART: Enable **Devices -> USB -> Silicon Labs CP2102 USB to UART Bridge Controller**
-* JTAG: Enable **Devices -> USB -> FTDI Dual RS232-HS**
-
-ESP-PROG's controller (FTDI Dual) contains 2 separate USB interfaces, while the ESP32's controller (CP2102) has a single interface; this means that 3 USB devices will become accessible when you attach both controllers. Most likely, these will show up under **/dev/ttyUSB\***. To find all attached USB devices, run the following command:
-
-```
-find /dev/ -name ttyUSB*
-```
-
-It is helpful to know which USB device belongs to which interface. To see the interface of a given device, run the following command:
-
-```
-udevadm info -a -p  $(udevadm info -q path -n <device>) | grep "{interface}"
-```
-
-Replace _\<device\>_ with _/dev/ttyUSB0_, _/dev/ttyUSB1_, etc. A demonstration of this can be seen below:
-
-![USB Information](images/usb_info.JPG)
+* **Devices -> USB -> FTDI Dual RS232-HS**
 
 Now it is time to get the application ready so we can debug it. Navigate to the _hello_world_ directory. Run the following command to build the app:
 
@@ -80,11 +63,15 @@ Now it is time to get the application ready so we can debug it. Navigate to the 
 idf.py build
 ```
 
-Now use JTAG to upload the app to the board:
+Now use JTAG to upload the app to the board. To do this, we will use OpenOCD, a software that can communicate with ESP-PROG (and many other adapters) to access the JTAG interface. Run the following command to program the ESP32:
 
 ```
 openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
 ```
+
+If the command succeeds, you will see output showing the binary was uploaded to the board and verified. See below for reference:
+
+![JTAG Program Success](images/jtag_programming_success.JPG)
 
 ## Testing JTAG
 
