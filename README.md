@@ -75,11 +75,21 @@ If the command succeeds, you will see output showing the binary was uploaded to 
 
 ## Testing JTAG
 
+GNU Debugger (GDB) is a popular open-source debugging tool for software applications. Espressif have updated GDB to recognize the Xtensa architecture, which is used by the ESP32. We can quickly start a GDB session using the following command:
 
 ```
 idf.py openocd gdb
 ```
 
-If the above command does not launch the GDB session, you may need to press the **EN** button on your development board first, and then try the command again.
+If the above command does not launch the GDB session, you may need to press the **EN** button on your development board first, and then try the command again. I personally found that sometimes the output will stop on the message "Hardware assisted breakpoint 1 at ..."
+
+### Place a breakpoint
+
+
+### Read the stack frame
+
+
+### Read the registers
+
 
 TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
