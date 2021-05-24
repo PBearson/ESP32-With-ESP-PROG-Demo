@@ -9,7 +9,7 @@ See below for a look at how our custom ESP32 board may connect to ESP-PROG:
 
 ![Setup Demo](images/setup-demo.jpg)
 
-The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **esp32-ecc608-dht22-st7735** sample project which showcases the capabilities of the sensors on our development board. We will perform some simple debugging tasks on this project as a demonstration.
+The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **hello_world** sample project. We will perform some simple debugging tasks on this project as a demonstration.
 
 ## Hardware Setup
 
@@ -17,9 +17,8 @@ You will need the following hardware to complete this project:
 
 * An ESP32-WROOM-32 development board, such as our custom board
 * ESP-PROG
-* 2 USB cables
-* At least 5 female-to-female jumper wires
-* Optionally, a USB hub with at least 2 ports
+* 1 USB cables
+* At least 6 female-to-female jumper wires
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
@@ -29,7 +28,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fiv
 
 | **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
-| 1 (VDD) | - |
+| 1 (VDD) | 5V |
 | 2 (TMS) | 14 |
 | 3 (GND) | GND |
 | 4 (TCK) | 13 |
