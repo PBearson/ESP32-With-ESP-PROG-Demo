@@ -91,6 +91,8 @@ Breakpoints are useful for observing the state of your program at a specific tim
 thb 31
 ```
 
+![Place Breakpoint](images/breakpoint.JPG)
+
 The breakpoint is temporary because it is deleted once the program reaches it. You can place permanent breakpoints by replacing __thb__ with __hb__. 
 
 We can see that the program continued running ("Continuing") until it hit the breakpoint ("Thread 1 hit ..."), at which point it halted and returned control to the GDB session.
@@ -108,6 +110,8 @@ The call stack holds important information about a program's local variables and
 ```
 i f
 ```
+
+![Read Stack Frame](images/stack_frame.JPG)
 
 We can see here that the program gives us several details, including:
 
@@ -127,8 +131,12 @@ The CPU registers can also provide lots of information about the state of the pr
 i r
 ```
 
+![Read Registers](images/stack_registers.JPG)
+
 There are actually many more registers that the previous command does not show. For example, the ESP32 actually contains 64 general purpose registers (labeled AR0 - AR63), but a subroutine can only access 16 of them at a time (labeled A0 - A15). To read all registers, you can run the following command:
 
 ```
 i all
 ```
+
+![Read All Registers](images/stack_all_registers.JPG)
