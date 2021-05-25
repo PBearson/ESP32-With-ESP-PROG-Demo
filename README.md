@@ -131,7 +131,7 @@ The CPU registers can also provide lots of information about the state of the pr
 i r
 ```
 
-![Read Registers](images/stack_registers.JPG)
+![Read Registers](images/registers.JPG)
 
 There are actually many more registers that the previous command does not show. For example, the ESP32 actually contains 64 general purpose registers (labeled AR0 - AR63), but a subroutine can only access 16 of them at a time (labeled A0 - A15). To read all registers, you can run the following command:
 
@@ -139,4 +139,4 @@ There are actually many more registers that the previous command does not show. 
 i all
 ```
 
-![Read All Registers](images/stack_all_registers.JPG)
+![Read All Registers](images/all_registers.JPG)
