@@ -85,11 +85,50 @@ If the above command does not launch the GDB session, you may need to press the 
 
 ### Place a breakpoint
 
+Breakpoints are useful for observing the state of your program at a specific time (for example, before or after a function is executed). The following command places a temporary breakpoint on line 31 of the active file, i.e., __hello_world_main.c__.
+
+```
+thb 31
+```
+
+The breakpoint is temporary because it is deleted once the program reaches it. You can place permanent breakpoints by replacing __thb__ with __hb__. 
+
+We can see that the program continued running ("Continuing") until it hit the breakpoint ("Thread 1 hit ..."), at which point it halted and returned control to the GDB session.
+
+To continue running the program, simply run the following command:
+
+```
+c
+```
 
 ### Read the stack frame
 
+The call stack holds important information about a program's local variables and subroutines. A stack is divided into frames. To learn information about the currently active subroutine, one way is to look at its stack frame. This can be done by running the following command:
+
+```
+i f
+```
+
+We can see here that the program gives us several details, including:
+
+* The current program counter (PC), i.e., the address of the currently active instruction
+* The saved PC value, i.e., the return address
+* The current stack pointer (SP), i.e., a pointer to the top of the stack
+* The previous SP value, i.e., the value of SP in the previous function
+* The address and values of any arguments
+* The start address of any local variables
+* Saved CPU registers.
 
 ### Read the registers
 
+The CPU registers can also provide lots of information about the state of the program. To view the registers, run the following command:
 
-TODO run openocd and different commands (place breakpoints, read stack frame, read registers)
+```
+i r
+```
+
+There are actually many more registers that the previous command does not show. For example, the ESP32 actually contains 64 general purpose registers (labeled AR0 - AR63), but a subroutine can only access 16 of them at a time (labeled A0 - A15). To read all registers, you can run the following command:
+
+```
+i all
+```
