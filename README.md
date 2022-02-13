@@ -60,11 +60,23 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
-Open VSCode. We are going to import an example `hello world` project into our workspace. Click on the PlatformIO icon 
+Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` menu, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
 
 ![Open PIO Home](images/open_pio_home.png)
 
-TODO.
+Click on `Project Examples`, and type `espidf-hello-world`. Select it, then hit `import`. This will install the project into your workspace. 
+
+By default, the file `platformio.ini` should open, but if not, you can easily open it by clicking the Explorer icon on the left side of the screen, which will show all files in this project.
+
+TODO discuss platformio.ini
+
+```
+[env:esp-prog]
+board = esp32dev
+debug_tool = esp-prog
+upload_protocol = esp-prog
+debug_init_break = tbreak app_main
+```
 
 ## Testing JTAG
 
