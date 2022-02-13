@@ -89,7 +89,7 @@ debug_init_break = tbreak app_main
 
 To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
 
-
+![Build Project](images/build_project.png)
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
