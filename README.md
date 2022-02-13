@@ -7,7 +7,7 @@ The ESP32 supports the JTAG debugging interface, which can allow users to debug 
 
 See below for a look at how our custom ESP32 board may connect to ESP-PROG:
 
-![Setup Demo](images/setup-demo.jpg)
+![Setup Demo](images/hiletgo-with-prog.jpg)
 
 The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **hello_world** sample project. We will perform some simple debugging tasks on this project as a demonstration.
 
