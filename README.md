@@ -56,31 +56,13 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 ## Software Setup
 
-Make sure you have ESP-IDF installed on your computer. Download this repository with the following command:
-
-```
-git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
-```
-
-After connecting your devices to the computer, make sure your Operating System can the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
+After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
-Now it is time to get the application ready so we can debug it. Navigate to the _hello_world_ directory. Run the following command to build the app:
+Open VSCode.
 
-```
-idf.py build
-```
-
-Now use JTAG to upload the app to the board. To do this, we will use OpenOCD, a software that can communicate with ESP-PROG (and many other adapters) to access the JTAG interface. Run the following command to program the ESP32:
-
-```
-openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
-```
-
-If the command succeeds, you will see output showing the binary was uploaded to the board and verified. See below for reference:
-
-![JTAG Program Success](images/jtag_programming_success.JPG)
+TODO.
 
 ## Testing JTAG
 
