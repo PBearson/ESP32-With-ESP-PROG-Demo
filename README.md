@@ -62,6 +62,8 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 Open VSCode.
 
+![Open PIO Home](images/open_pio_home.png)
+
 TODO.
 
 ## Testing JTAG
