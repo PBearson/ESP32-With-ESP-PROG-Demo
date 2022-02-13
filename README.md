@@ -13,16 +13,25 @@ The purpose of this project is to show users how to pair the ESP-WROOM-32 develo
 
 ## Prerequisites
 
+Download the Ubuntu VM, which already has VSCode and PlatformIO installed: https://www.dropbox.com/s/0g7w8qduzj2rb1k/UbuntuIoT.ova?dl=0
 
+Import the VM into VirtualBox and launch it. The default username is `iot`. The password is `toi`.
+
+The debugging software has a dependency on libpython2.7.so.1.0, so we need to install it. Open a terminal and run the following commands:
+
+```
+sudo apt update
+sudo apt install libpython2.7
+```
 
 ## Hardware Setup
 
 You will need the following hardware to complete this project:
 
-* An ESP32-WROOM-32 development board, such as our custom board
+* A Hiletgo ESP32-WROOM-32 development board
 * ESP-PROG
 * 1 USB cable
-* At least 6 female-to-female jumper wires
+* 6 male-to-female jumper wires
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
