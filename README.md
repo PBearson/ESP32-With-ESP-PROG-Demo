@@ -60,7 +60,9 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
-Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` menu, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
+The USB controller may also be named **Future Devices Dual RS232-HS**
+
+Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` tab, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
 
 ![Open PIO Home](images/open_pio_home.png)
 
@@ -83,9 +85,13 @@ upload_protocol = esp-prog
 debug_init_break = tbreak app_main
 ```
 
-## Testing JTAG
+### Build Project
 
-TODO
+To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
+
+
+
+A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
 ### Upload Firmware
 
