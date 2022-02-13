@@ -60,7 +60,7 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
-Open VSCode.
+Open VSCode. We are going to import an example `hello world` project into our workspace. Click on the PlatformIO icon 
 
 ![Open PIO Home](images/open_pio_home.png)
 
@@ -70,7 +70,34 @@ TODO.
 
 TODO
 
-### Download Firmware
-
 ### Upload Firmware
 
+TODO use the standard upload task with esp-prog interface enabled.
+
+### Launch Debugger
+
+TODO launch debugger, skip pre-debugging tasks
+
+### Debug
+
+TODO set breakpoint in printf function and continue into that function: `thb` and `c`
+TODO advance to the next instruction a few times: `ni`
+Notice how the registers change, including PC.
+
+### Change Registers
+
+TODO change the instruction pointer to the beginning of printf: `set $pc=printf`
+Print out the instruction pointer
+
+## Change Memory
+
+TODO restart the debugging session. Place a breakpoint in the while loop in app_main at the print statement, line 34). Go to the breakpoint.
+Change the variable `i` in the Variables -> Local sub-menu. Double click on the variable, and edit it to ant value you want, such as 100.
+Then go back to the debug console 
+
+### Download Firmware
+
+TODO open terminal and find firmware: `find -name firmware.elf`
+TODO list memory mappings of different sections in firmware: `readelf -S <path to firmware.bin>`
+
+TODO launch debugger and use memory dump instructions to dump firmware at run-time.
