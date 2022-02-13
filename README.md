@@ -68,10 +68,15 @@ Click on `Project Examples`, and type `espidf-hello-world`. Select it, then hit 
 
 By default, the file `platformio.ini` should open, but if not, you can easily open it by clicking the Explorer icon on the left side of the screen, which will show all files in this project.
 
-TODO discuss platformio.ini
+Replace the contents of `platformio.ini` with the following:
 
 ```
-[env:esp-prog]
+[env]
+platform = espressif32
+framework = espidf
+monitor_speed = 115200
+
+[env:hiletgo-with-jtag]
 board = esp32dev
 debug_tool = esp-prog
 upload_protocol = esp-prog
