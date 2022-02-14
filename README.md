@@ -139,15 +139,38 @@ i args
 
 Our breakpoint still exists, so we can continue (`c`) the program until it re-enters `printf` again. Then, we can execute `entry` (`nexti`) before checking the arguments again. Now you will see that the string has updated.
 
-Here are a couple other useful commands you should know about.
+Here are a couple other useful commands you should know about:
 * To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
 * To view the backtrace of the call stack, type `bt`.
 * To view registers, type `i r`.
 
 ### Change Registers
 
-TODO change the instruction pointer to the beginning of printf: `set $pc=printf`
-Print out the instruction pointer
+We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
+
+```
+set $a8=12345678
+```
+
+Now print the value of A8, in both hexadecimal and decimal format:
+
+```
+i r a8
+```
+
+You can even modify the instruction pointer using this method:
+
+```
+set $pc=0
+```
+
+Now continue the program:
+
+```
+cont
+```
+
+The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
 
 ## Change Memory
 
