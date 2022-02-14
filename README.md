@@ -10,7 +10,7 @@ See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PR
 ![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
 
-The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger debugging board.
+The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
 
 ## Prerequisites
 
