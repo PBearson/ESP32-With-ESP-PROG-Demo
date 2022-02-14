@@ -7,7 +7,8 @@ The ESP32 supports the JTAG debugging interface, which can allow users to debug 
 
 See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PROG:
 
-![Setup Demo](images/hiletgo-with-prog.jpg)
+![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
+
 
 The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger debugging board.
 
@@ -35,7 +36,7 @@ You will need the following hardware to complete this project:
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
-![Pinout](images/nsf_edu_diagram.jpg)
+![Pinout](https://user-images.githubusercontent.com/11084018/153796581-d6774911-debe-4abe-91eb-457aa0a2b53a.png)
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
@@ -64,7 +65,7 @@ The USB controller may also be named **Future Devices Dual RS232-HS**
 
 Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` tab, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
 
-![Open PIO Home](images/open_pio_home.png)
+![Open PIO Home](https://user-images.githubusercontent.com/11084018/153796619-b1bdca9d-b231-451e-8597-e3abfddc1d2c.png)
 
 Click on `Project Examples`, and type `espidf-hello-world`. Select it, then hit `import`. This will install the project into your workspace. 
 
@@ -89,7 +90,7 @@ debug_init_break = tbreak app_main
 
 To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
 
-![Build Project](images/build_project.png)
+![Build Project](https://user-images.githubusercontent.com/11084018/153796643-564e0303-0783-4845-82c2-01e46b881284.png)
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
