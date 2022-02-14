@@ -95,11 +95,19 @@ A terminal will open, and you will see the output from the build task. After a f
 
 ### Upload Firmware
 
-TODO use the standard upload task with esp-prog interface enabled.
+To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
+
+![image](https://user-images.githubusercontent.com/11084018/153781182-b54333ed-7d73-4630-91bc-1a9e9817517c.png)
 
 ### Launch Debugger
 
-TODO launch debugger, skip pre-debugging tasks
+To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the dropdown menu and choose the option `PIO Debug (skip Pre-Debug) ...`.
+
+![image](https://user-images.githubusercontent.com/11084018/153781419-1b0ec1e0-7457-4a42-904d-06f4336a5b96.png)
+
+Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`.
+
+![image](https://user-images.githubusercontent.com/11084018/153781692-a4b8c79b-f3fd-45f0-9bce-93c8e7412ebc.png)
 
 ### Debug
 
