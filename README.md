@@ -230,3 +230,7 @@ strings rodata.bin | head
 ```
 
 ![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png)
+
+## Disable JTAG
+
+TODO
