@@ -233,4 +233,20 @@ strings rodata.bin | head
 
 ## Disable JTAG
 
-TODO
+In production environments, it is **heavily** recommended that the user disables the JTAG functionality. To do so, open a new terminal and install the `esptool` suite of tools:
+
+```
+sudo apt install esptool
+```
+
+One of the installed tools is `espefuse`, which provides read and write access to the ESP32's **eFuses**, which is a special kind of nonvolatile memory with the following restriction: once an eFuse bit is seto 1, it can never be set back to 0. One of these eFuses is `JTAG_DISABLE`, a single-bit fuse controls access to the JTAG interface. By default, `JTAG_DIABLE` is set to 0. Setting it to 1 shall disable the JTAG access. _**This process is irreversible.**_
+
+Unplug the USB cable from the ESP-PROG, and plug in the ESP32. Ensure the USB controller is connected to your VM.
+
+In the terminal we just opened, type the following to disable JTAG:
+
+```
+espefuse burn_efuse JTAG_DISABLE
+```
+
+The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with process.
