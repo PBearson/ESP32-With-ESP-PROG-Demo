@@ -215,3 +215,17 @@ Now return to the Debug Console while the debugging session is active. Dump the 
 ```
 dump binary memory rodata.bin 0x3f400000 0x3f7fffff
 ```
+
+Dump the program code:
+
+```
+dump binary memory text.bin 0x400c2000 0x40bfffff
+```
+
+Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a terminal and view the file contents; for example:
+
+```
+strings rodata.bin | head
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png)
