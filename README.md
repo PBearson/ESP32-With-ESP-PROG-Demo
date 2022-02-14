@@ -249,4 +249,4 @@ In the terminal we just opened, type the following to disable JTAG:
 espefuse burn_efuse JTAG_DISABLE
 ```
 
-The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with process.
+The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with the process.
