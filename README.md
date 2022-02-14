@@ -105,15 +105,44 @@ To launch the debugger, navigate to the `Run and Debug` menu by selecting its ic
 
 ![image](https://user-images.githubusercontent.com/11084018/153781419-1b0ec1e0-7457-4a42-904d-06f4336a5b96.png)
 
-Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`.
+Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. However, we will use the Debug Console for the majority of our debugging tasks.
 
-![image](https://user-images.githubusercontent.com/11084018/153781692-a4b8c79b-f3fd-45f0-9bce-93c8e7412ebc.png)
+![image](https://user-images.githubusercontent.com/11084018/153781742-68132709-8210-4348-84d3-3a7eea3ec587.png)
 
 ### Debug
 
-TODO set breakpoint in printf function and continue into that function: `thb` and `c`
-TODO advance to the next instruction a few times: `ni`
-Notice how the registers change, including PC.
+To illustrate a simple example of how to debug a program, we will place a breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
+
+```
+hb printf
+```
+
+Now run the program until it reaches this function:
+
+```
+cont
+```
+
+The ESP32 architecture (Xtensa LX6) contains an `entry` instruction at the beginning of most subroutines. This instruction modifies an internal mechanism of the ESP32 called the **register window**, allowing the current subroutine to access its arguments. In order to view the arguments passed to `printf` (in this case, the string that will be printed out to the console), we need to first execute the `entry` instruction. To do this, run the following:
+
+```
+nexti
+```
+
+Now you can view the arguments passed to `printf`:
+
+```
+i args
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153783242-2ae7b69d-25e6-48b8-b076-8a97098a04a0.png)
+
+Our breakpoint still exists, so we can continue (`c`) the program until it re-enters `printf` again. Then, we can execute `entry` (`nexti`) before checking the arguments again. Now you will see that the string has updated.
+
+Here are a couple other useful commands you should know about.
+* To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
+* To view the backtrace of the call stack, type `bt`.
+* To view registers, type `i r`.
 
 ### Change Registers
 
