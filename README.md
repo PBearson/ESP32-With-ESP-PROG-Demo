@@ -174,11 +174,39 @@ The program will crash because it tries to execute at address 0x0. However, no i
 
 ## Change Memory
 
-TODO restart the debugging session. Place a breakpoint in the while loop in app_main at the print statement, line 34). Go to the breakpoint.
-Change the variable `i` in the Variables -> Local sub-menu. Double click on the variable, and edit it to ant value you want, such as 100.
-Then go back to the debug console 
+Open the source file `hello_world_main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following for loop: 
+
+![image](https://user-images.githubusercontent.com/11084018/153785433-882f6f93-20c0-493d-8794-408859a71439.png)
+
+To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 34):
+
+```
+hb 34
+```
+
+Print the current value of `i`:
+
+```
+print i
+```
+
+Now modify the value of `i`. For example, you can see it to 100:
+
+```
+set variable i = 100
+```
+
+Now re-print the variable, and you will see it has changed:
+
+```
+print i
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png)
 
 ### Download Firmware
+
+A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. 
 
 TODO open terminal and find firmware: `find -name firmware.elf`
 TODO list memory mappings of different sections in firmware: `readelf -S <path to firmware.bin>`
