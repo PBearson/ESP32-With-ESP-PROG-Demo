@@ -5,24 +5,38 @@ Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is par
 
 The ESP32 supports the JTAG debugging interface, which can allow users to debug their embedded applications much like they would a normal Windows/Linux executable. For instance, JTAG allows users to place breakpoints in code, view the memory stack, view registers, and more. However, most ESP32 boards on the market do not contain the required hardware for communicating with an external JTAG adapter. This hardware can be found on chips such as FT2232HL, which is implemented by the ESP-PROG. Other technical details will be spared here. You may refer to Espressif's guides on [JTAG debugging](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html) and [ESP-PROG](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html) for more information on these topics.
 
-See below for a look at how our custom ESP32 board may connect to ESP-PROG:
+See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PROG:
 
-![Setup Demo](images/setup-demo.jpg)
+![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
-The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **hello_world** sample project. We will perform some simple debugging tasks on this project as a demonstration.
+
+The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger debugging board.
+
+## Prerequisites
+
+Download the Ubuntu VM, which already has VSCode and PlatformIO installed: https://www.dropbox.com/s/0g7w8qduzj2rb1k/UbuntuIoT.ova?dl=0
+
+Import the VM into VirtualBox and launch it. The default username is `iot`. The password is `toi`.
+
+The debugging software has a dependency on libpython2.7.so.1.0, so we need to install it. Open a terminal and run the following commands:
+
+```
+sudo apt update
+sudo apt install libpython2.7
+```
 
 ## Hardware Setup
 
 You will need the following hardware to complete this project:
 
-* An ESP32-WROOM-32 development board, such as our custom board
+* A Hiletgo ESP32-WROOM-32 development board
 * ESP-PROG
 * 1 USB cable
-* At least 6 female-to-female jumper wires
+* 6 male-to-female jumper wires
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
-![Pinout](images/nsf_edu_diagram.jpg)
+![Pinout](https://user-images.githubusercontent.com/11084018/153796581-d6774911-debe-4abe-91eb-457aa0a2b53a.png)
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
@@ -39,104 +53,180 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. See the following image for a demonstration:
-
-![Arch](images/nsf_edu.jpg) 
-
-You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
+To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. You do **not** need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
 ## Software Setup
 
-Make sure you have ESP-IDF installed on your computer. Download this repository with the following command:
-
-```
-git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
-```
-
-After connecting your devices to the computer, make sure your Operating System can the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
+After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
-Now it is time to get the application ready so we can debug it. Navigate to the _hello_world_ directory. Run the following command to build the app:
+The USB controller may also be named **Future Devices Dual RS232-HS**
+
+Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` tab, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
+
+![Open PIO Home](https://user-images.githubusercontent.com/11084018/153796619-b1bdca9d-b231-451e-8597-e3abfddc1d2c.png)
+
+Click on `Project Examples`, and type `espidf-hello-world`. Select it, then hit `import`. This will install the project into your workspace. 
+
+By default, the file `platformio.ini` should open, but if not, you can easily open it by clicking the Explorer icon on the left side of the screen, which will show all files in this project.
+
+Replace the contents of `platformio.ini` with the following:
 
 ```
-idf.py build
+[env]
+platform = espressif32
+framework = espidf
+monitor_speed = 115200
+
+[env:hiletgo-with-jtag]
+board = esp32dev
+debug_tool = esp-prog
+upload_protocol = esp-prog
+debug_init_break = tbreak app_main
 ```
 
-Now use JTAG to upload the app to the board. To do this, we will use OpenOCD, a software that can communicate with ESP-PROG (and many other adapters) to access the JTAG interface. Run the following command to program the ESP32:
+### Build Project
+
+To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
+
+![Build Project](https://user-images.githubusercontent.com/11084018/153796643-564e0303-0783-4845-82c2-01e46b881284.png)
+
+A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
+
+### Upload Firmware
+
+To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
+
+![image](https://user-images.githubusercontent.com/11084018/153781182-b54333ed-7d73-4630-91bc-1a9e9817517c.png)
+
+### Launch Debugger
+
+To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the dropdown menu and choose the option `PIO Debug (skip Pre-Debug) ...`.
+
+![image](https://user-images.githubusercontent.com/11084018/153781419-1b0ec1e0-7457-4a42-904d-06f4336a5b96.png)
+
+Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. However, we will use the Debug Console for the majority of our debugging tasks.
+
+![image](https://user-images.githubusercontent.com/11084018/153781742-68132709-8210-4348-84d3-3a7eea3ec587.png)
+
+### Debug
+
+To illustrate a simple example of how to debug a program, we will place a breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
 
 ```
-openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+hb printf
 ```
 
-If the command succeeds, you will see output showing the binary was uploaded to the board and verified. See below for reference:
-
-![JTAG Program Success](images/jtag_programming_success.JPG)
-
-## Testing JTAG
-
-GNU Debugger (GDB) is a popular open-source debugging tool for software applications. Espressif have updated GDB to recognize the Xtensa architecture, which is used by the ESP32. We can quickly start a GDB session using the following command:
+Now run the program until it reaches this function:
 
 ```
-idf.py openocd gdb
+cont
 ```
 
-If the above command does not launch the GDB session, you may need to press the **EN** button on your development board first, and then try the command again. I personally found that sometimes the output will stop on the message "Hardware assisted breakpoint 1 at ..."
-
-### Place a breakpoint
-
-Breakpoints are useful for observing the state of your program at a specific time (for example, before or after a function is executed). The following command places a temporary breakpoint on line 31 of the active file, i.e., __hello_world_main.c__.
+The ESP32 architecture (Xtensa LX6) contains an `entry` instruction at the beginning of most subroutines. This instruction modifies an internal mechanism of the ESP32 called the **register window**, allowing the current subroutine to access its arguments. In order to view the arguments passed to `printf` (in this case, the string that will be printed out to the console), we need to first execute the `entry` instruction. To do this, run the following:
 
 ```
-thb 31
+nexti
 ```
 
-![Place Breakpoint](images/breakpoint.JPG)
-
-The breakpoint is temporary because it is deleted once the program reaches it. You can place permanent breakpoints by replacing __thb__ with __hb__. 
-
-We can see that the program continued running ("Continuing") until it hit the breakpoint ("Thread 1 hit ..."), at which point it halted and returned control to the GDB session.
-
-To continue running the program, simply run the following command:
+Now you can view the arguments passed to `printf`:
 
 ```
-c
+i args
 ```
 
-### Read the stack frame
+![image](https://user-images.githubusercontent.com/11084018/153783242-2ae7b69d-25e6-48b8-b076-8a97098a04a0.png)
 
-The call stack holds important information about a program's local variables and subroutines. A stack is divided into frames. To learn information about the currently active subroutine, one way is to look at its stack frame. This can be done by running the following command:
+Our breakpoint still exists, so we can continue (`c`) the program until it re-enters `printf` again. Then, we can execute `entry` (`nexti`) before checking the arguments again. Now you will see that the string has updated.
 
-```
-i f
-```
+Here are a couple other useful commands you should know about:
+* To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
+* To view the backtrace of the call stack, type `bt`.
+* To view registers, type `i r`.
 
-![Read Stack Frame](images/stack_frame.JPG)
+### Change Registers
 
-We can see here that the program gives us several details, including:
-
-* The current program counter (PC), i.e., the address of the currently active instruction
-* The saved PC value, i.e., the return address
-* The current stack pointer (SP), i.e., a pointer to the top of the stack
-* The previous SP value, i.e., the value of SP in the previous function
-* The address and values of any arguments
-* The start address of any local variables
-* Saved CPU registers.
-
-### Read the registers
-
-The CPU registers can also provide lots of information about the state of the program. To view the registers, run the following command:
+We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
 
 ```
-i r
+set $a8=12345678
 ```
 
-![Read Registers](images/registers.JPG)
-
-There are actually many more registers that the previous command does not show. For example, the ESP32 actually contains 64 general purpose registers (labeled AR0 - AR63), but a subroutine can only access 16 of them at a time (labeled A0 - A15). To read all registers, you can run the following command:
+Now print the value of A8, in both hexadecimal and decimal format:
 
 ```
-i all
+i r a8
 ```
 
-![Read All Registers](images/all_registers.JPG)
+You can even modify the instruction pointer using this method:
+
+```
+set $pc=0
+```
+
+Now continue the program:
+
+```
+cont
+```
+
+The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
+
+## Change Memory
+
+Open the source file `hello_world_main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following for loop: 
+
+![image](https://user-images.githubusercontent.com/11084018/153785433-882f6f93-20c0-493d-8794-408859a71439.png)
+
+To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 34):
+
+```
+hb 34
+```
+
+Print the current value of `i`:
+
+```
+print i
+```
+
+Now modify the value of `i`. For example, you can see it to 100:
+
+```
+set variable i = 100
+```
+
+Now re-print the variable, and you will see it has changed:
+
+```
+print i
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png)
+
+### Download Firmware
+
+A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
+
+Section 1.3.1 of the [ESP32 technical reference manual](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf) specifies the address mapping used by the ESP32. Section 1.3.3 specifies the address mapping of external memory, including external flash and external SRAM. The program code (`.text`) and constant variables (`.rodata`) are typically stored in the external flash. Constant variables are stored in the address range 0x3F400000 to 0x3F7FFFFF, and external code is stored in the address range 0x400C2000 to 0x40BFFFFF.
+
+Now return to the Debug Console while the debugging session is active. Dump the program constants:
+
+```
+dump binary memory rodata.bin 0x3f400000 0x3f7fffff
+```
+
+Dump the program code:
+
+```
+dump binary memory text.bin 0x400c2000 0x40bfffff
+```
+
+Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a terminal and view the file contents; for example:
+
+```
+strings rodata.bin | head
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png)
