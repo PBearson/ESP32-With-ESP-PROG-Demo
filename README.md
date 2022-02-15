@@ -43,13 +43,15 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 ## Software Setup
 
-Make sure you have ESP-IDF installed on your computer. Download this repository with the following command:
+**IMPORTANT:** Make sure you have ESP-IDF installed on your computer.
+
+Download this repository with the following command:
 
 ```
-git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
+git clone -b command_line https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git
 ```
 
-After connecting your devices to the computer, make sure your Operating System can the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
+After connecting your devices to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
