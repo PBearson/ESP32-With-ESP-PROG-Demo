@@ -9,16 +9,16 @@ See below for a look at how our custom ESP32 board may connect to ESP-PROG:
 
 ![Setup Demo](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
-The purpose of this project is to show users how to pair the ESP32 development board with the ESP-PROG device. As a demonstration, this repository contains the **hello_world** sample project. We will perform some simple debugging tasks on this project as a demonstration.
+The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use the command line interface for this demo. We will use the `hello world` sample project in this repository, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
 
 ## Hardware Setup
 
 You will need the following hardware to complete this project:
 
-* An ESP32-WROOM-32 development board, such as our custom board
+* A Hiletgo ESP32-WROOM-32 development board
 * ESP-PROG
 * 1 USB cable
-* At least 6 female-to-female jumper wires
+* At least 6 male-to-female jumper wires
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
@@ -39,11 +39,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. See the following image for a demonstration:
-
-![Arch](images/nsf_edu.jpg) 
-
-You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
+To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. You do not need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
 ## Software Setup
 
