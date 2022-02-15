@@ -43,7 +43,7 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 ## Software Setup
 
-**IMPORTANT:** Make sure you have ESP-IDF installed on your computer.
+**IMPORTANT:** Make sure you have ESP-IDF installed on your computer. Follow the guide here: https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/get-started/index.html
 
 Download this repository with the following command:
 
