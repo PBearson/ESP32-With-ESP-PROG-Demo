@@ -37,6 +37,7 @@ You will need the following hardware to complete this project:
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
 ![Pinout](https://user-images.githubusercontent.com/11084018/153796581-d6774911-debe-4abe-91eb-457aa0a2b53a.png)
+![image](JTAG_pin.png width="100")
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
@@ -53,7 +54,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-![image](JTAG_pin.png | width=100)
+
 To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. You do **not** need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
 ## Software Setup
