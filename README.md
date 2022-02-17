@@ -254,7 +254,35 @@ espefuse burn_efuse JTAG_DISABLE
 
 The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with the process.
 
-Notes:
+## Use JTAG Without the Firmware
+
+Up until now, we assumed that the firmware on the ESP32 was built and uploaded by us. But what if we do not have access to the source code, and the ESP32 is running some firmware that is unknown to us? Can we still use JTAG to debug the device?
+
+While the procedure is mildly unintuitive, it is still completely possible to debug an ESP32 without access to the firmware. The setup is described below.
+
+### Download and Install ESP-IDF
+
+TODO
+
+### Build Sample Project
+
+TODO -- this step is necessary since the debugging software expects a firmware to be present in the current directory, even if that firmware is not the one we want to debug.
+
+### Configure gdbinit
+
+TODO -- remove file line and replace thb line with our best guess of the app_main starting point
+
+### Enforce gdbinit Integrity
+
+TODO -- copy gdbinit to tmp, then continuously copy tmp to gdbinit (`watch -n 0 cp tmp gdbinit`). Necessary since the debug command will overwrite gdbinit with a default value. 
+
+### Launch Debugger
+
+TODO.
+
+What happens if the breakpoint is never hit? How do we fix that?
+
+## Notes:
 
 If ESP-PROG's pin header is set to 5V, we then need to change Pin 1 of ESP-PROG to the 5V pin of ESP32.
 
