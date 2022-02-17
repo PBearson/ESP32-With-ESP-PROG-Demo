@@ -256,6 +256,7 @@ The prompt will warn you that the operation is irreversible. You are instructed 
 
 Notes:
 
-ESP-PROG's pin header is set to 5V.
+If ESP-PROG's pin header is set to 5V, we then need to change Pin 1 of ESP-PROG to the 5V pin of ESP32.
+
 ![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
