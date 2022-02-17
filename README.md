@@ -17,7 +17,7 @@ Download the Ubuntu VM, which already has VSCode and PlatformIO installed: https
 
 Import the VM into VirtualBox and launch it. The default username is `iot`. The password is `toi`.
 
-The debugging software has a dependency on libpython2.7.so.1.0, so we need to install it. Open a terminal and run the following commands:
+The debugging software has a dependency on libpython2.7.so.1.0, so we need to install it if needed. Open a terminal and run the following commands:
 
 ```
 sudo apt update
