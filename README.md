@@ -273,6 +273,15 @@ source $HOME/.bashrc
 
 ### Build a Sample Project
 
+ESP-IDF contains many different example projects. Change your directory into one of these sample projects. For example:
+
+```
+cd $HOME/esp/esp-idf/examples/protocols/mqtt/tcp
+```
+
+To start GDB and connect to the ESP-PROG, we need to run `idf.py openocd gdb`. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
+
+
 TODO -- this step is necessary since the debugging software expects a firmware to be present in the current directory, even if that firmware is not the one we want to debug.
 
 ### Configure gdbinit
