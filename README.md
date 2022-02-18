@@ -275,9 +275,9 @@ While the procedure is somewhat unintuitive, it is still completely possible to 
 
 ### Download and Install ESP-IDF
 
-First, open a new terminal. Download and install ESP-IDF version v4.4 by following the instructions here: https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/get-started/index.html
+First, open a new terminal. Download and install ESP-IDF v4.4 by following the instructions here: https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/get-started/index.html
 
-In Step 4, you will add environment variables to your PATH by running `export.sh`. To save these changes permantently, you can modify the `bashrc` script in your home directory by running the following commands:
+In Step 4, you will add environment variables to your PATH by running `export.sh`. To save these changes permanently, you can modify the `bashrc` script in your home directory by running the following commands:
 
 ```
 echo ". $HOME/esp/esp-idf/export.sh" >> $HOME/.bashrc
