@@ -304,17 +304,76 @@ idf.py build
 
 ### Configure gdbinit
 
-TODO -- remove file line and replace thb line with our best guess of the app_main starting point
+You can try to run `idf.py openocd gdb` again, and most likely you will see output similar to the following:
+
+![image](https://user-images.githubusercontent.com/11084018/154603121-c4336640-edfa-46c5-853a-47a6528c0a07.png)
+
+Most notably, we can see that a breakpoint was placed at address 0x400d7130. This is supposedly the address of `app_main` in our script. However, the program will probably never hit the breakpoint, and the debugger will wait forever. This is because we are giving GDB the symbol information from the MQTT ELF file. This includes the address of `app_main`, which will differ from project to project. Therefore, the firmware running on the ESP32 has a different `app_main` address than the firmware we just built.
+
+To solve this issue, we can observe that `idf.py openocd gdb` reads in some initial commands from a file called `gdbinit`, which exists in the `build` directory. For example, in my case, this file exists on the following path: 
+
+`$HOME/esp/esp-idf/examples/protocols/mqtt/tcp/build/gdbinit`
+
+Note the contents of this file below:
+
+```
+file /home/iot/esp/esp-idf/examples/protocols/mqtt/tcp/build/mqtt_tcp.elf
+target remote :3333
+mon reset halt
+flushregs
+thb app_main
+c
+```
+
+This file loads the ELF file of our project, giving GDB access to its symbols. It also places a breakpoint at `app_main`. Of course, we know that this breakpoint is basically worthless, since the program never reaches it. We need to modify `gdbinit` so that it inserts a breakpoint in a better location and it doesn't load the erroneous symbol information.
+
+We do not have access to the symbol information of the running firmware, so we have to estimate where the breakpoint should be inserted. One option is to place a breakpoint at `call_start_cpu0`, which is the entry point of each firmware image. Based on my experience, the address of this function will not change unless we modify the bootloader or partition table are modifed. In this case, the MQTT project uses the same bootlaoder and partition table as the firmware running on the ESP32, so the address of `call_start_cpu0` should also be the same. This logic will not work for every project, but it is good enough for now.
+
+To find the address of `call_start_cpu0` in the MQTT project, run the following:
+
+```
+xtensa-esp32-elf-objdump -d build/mqtt_tcp.elf | grep "<call_start_cpu0>:"
+```
+
+This will return the address of `call_start_cpu0`. In my case, the address of was 0x4008122c.
+
+Now open `gdbinit` in VSCode and replace its contents with the following:
+
+```
+target remote :3333
+mon reset halt
+flushregs
+thb *0x4008122c
+c
+```
+
+Make sure to change the second-to-last line to match the address you received.
 
 ### Enforce gdbinit Integrity
 
-TODO -- copy gdbinit to tmp, then continuously copy tmp to gdbinit (`watch -n 0 cp tmp gdbinit`). Necessary since the debug command will overwrite gdbinit with a default value. 
+It turns out that running `idf.py openocd gdb` not only reads from `gdbinit` -- it also overwrites it with the contents shown earlier. This means the changes we just made will be overwritten when we try to run GDB.
+
+Luckily, there is a simple way to fix this. Open a new terminal, change into the `build` directory, and copy `gdbinit` to a new file:
+
+```
+cp gdbinit gdbtmp
+```
+
+Now, open `gdbtmp` in VSCode and set its contents to our desired `gdbinit` contents. Finally, in the second terminal, run this command:
+
+```
+watch -n 0 cp gdbtmp gdbinit
+```
+
+This will continuously copy the contents of `gdbtmp` into `gdbinit`. Now, even when `gdbinit` is overwritten by GDB, our new script will revert the file back to our desired contents before GDB actually reads the file.
 
 ### Launch Debugger
 
-TODO.
+Return to first terminal and run `idf.py openocd gdb` one last time. Hopefully, you should be greeting by a GDB session that successfully hits the breakpoint.
 
-What happens if the breakpoint is never hit? How do we fix that?
+At this point, we can perform nearly all of the same debugging commands that were shown before. The only differences are 1) we do not have access to symbol information, and 2) we have hit a breakpoint in `call_start_cpu0` instead of `app_main`. We can still read/write registers and memory, as well as dump the memory contents to a file. We can also disassemble the current function:
+
+![image](https://user-images.githubusercontent.com/11084018/154613892-ccc695ab-1e31-4cfd-a7b1-47abb42692a7.png)
 
 ## Notes:
 
