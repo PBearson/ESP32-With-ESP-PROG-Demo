@@ -258,11 +258,17 @@ The prompt will warn you that the operation is irreversible. You are instructed 
 
 Up until now, we assumed that the firmware on the ESP32 was built and uploaded by us. But what if we do not have access to the source code, and the ESP32 is running some firmware that is unknown to us? Can we still use JTAG to debug the device?
 
-While the procedure is mildly unintuitive, it is still completely possible to debug an ESP32 without access to the firmware. The setup is described below.
+While the procedure is somewhat unintuitive, it is still completely possible to debug an ESP32 without access to the firmware. The setup is described below.
 
 ### Download and Install ESP-IDF
 
-TODO
+First, open a new terminal. Download and install ESP-IDF version v4.4 by following the instructions here: https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/get-started/index.html
+
+In Step 4, you will add environment variables to your PATH. To 
+
+```
+. $HOME/esp/esp-idf/export.sh
+```
 
 ### Build Sample Project
 
