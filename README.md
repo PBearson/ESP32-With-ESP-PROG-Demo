@@ -1,6 +1,11 @@
 # ESP32-With-ESP-PROG-Demo
 Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is part of a course at University of Massachusetts Lowell, and some details may need to be changed to work for other readers.
 
+## Table of Contents
+
+1. [Overview](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#overview)
+2. 
+
 ## Overview
 
 The ESP32 supports the JTAG debugging interface, which can allow users to debug their embedded applications much like they would a normal Windows/Linux executable. For instance, JTAG allows users to place breakpoints in code, view the memory stack, view registers, and more. However, most ESP32 boards on the market do not contain the required hardware for communicating with an external JTAG adapter. This hardware can be found on chips such as FT2232HL, which is implemented by the ESP-PROG. Other technical details will be spared here. You may refer to Espressif's guides on [JTAG debugging](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html) and [ESP-PROG](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html) for more information on these topics.
@@ -103,6 +108,8 @@ To upload the firmware, select the `Upload` task from the previous menu. Since w
 
 ![image](https://user-images.githubusercontent.com/11084018/153781182-b54333ed-7d73-4630-91bc-1a9e9817517c.png)
 
+## Debugging
+
 ### Launch Debugger
 
 To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the dropdown menu and choose the option `PIO Debug (skip Pre-Debug) ...`.
@@ -113,7 +120,7 @@ Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB sess
 
 ![image](https://user-images.githubusercontent.com/11084018/153781742-68132709-8210-4348-84d3-3a7eea3ec587.png)
 
-### Debug
+### Debuggign Examples
 
 To illustrate a simple example of how to debug a program, we will place a breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
 
