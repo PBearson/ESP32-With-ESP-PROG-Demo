@@ -369,7 +369,7 @@ This will continuously copy the contents of `gdbtmp` into `gdbinit`. Now, even w
 
 ### Launch Debugger
 
-Return to first terminal and run `idf.py openocd gdb` one last time. Hopefully, you should be greeting by a GDB session that successfully hits the breakpoint.
+Return to the first terminal and run `idf.py openocd gdb` one last time. Hopefully, you should be greeted by a GDB session that successfully hits the breakpoint.
 
 At this point, we can perform nearly all of the same debugging commands that were shown before. The only differences are 1) we do not have access to symbol information, and 2) we have hit a breakpoint in `call_start_cpu0` instead of `app_main`. We can still read/write registers and memory, as well as dump the memory contents to a file. We can also disassemble the current function:
 
