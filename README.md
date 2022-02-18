@@ -4,7 +4,13 @@ Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is par
 ## Table of Contents
 
 1. [Overview](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#overview)
-2. 
+2. [Prerequisites](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#prerequisites)
+3. [Hardware Setup](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#hardware-setup)
+4. [Software Setup](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#software-setup)
+5. [Debugging](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#debugging)
+6. [Disable JTAG](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#disable-jtag)
+7. [Use JTAG Without the Firmware](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#use-jtag-without-the-firmware)
+8. [Notes](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#notes)
 
 ## Overview
 
@@ -120,7 +126,7 @@ Switch to the Debug Console. After a few seconds, OpenOCD will launch a GDB sess
 
 ![image](https://user-images.githubusercontent.com/11084018/153781742-68132709-8210-4348-84d3-3a7eea3ec587.png)
 
-### Debuggign Examples
+### Debugging Examples
 
 To illustrate a simple example of how to debug a program, we will place a breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
 
