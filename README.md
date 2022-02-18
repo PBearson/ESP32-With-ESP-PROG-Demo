@@ -294,8 +294,13 @@ cd $HOME/esp/esp-idf/examples/protocols/mqtt/tcp
 
 To start GDB and connect to the ESP-PROG, we need to run `idf.py openocd gdb`. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
 
+We are going to build the project to satisfy the ELF file requirement. However, we are not going to flash the project to the ESP32. Recall that the firmware we are interested in is already running on the ESP32. Hence, it actually does not matter which project we choose to build during this step. In my case, I have chosen to build an MQTT project.
 
-TODO -- this step is necessary since the debugging software expects a firmware to be present in the current directory, even if that firmware is not the one we want to debug.
+To build the project, run:
+
+```
+idf.py build
+```
 
 ### Configure gdbinit
 
