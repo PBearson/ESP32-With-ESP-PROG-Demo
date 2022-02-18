@@ -335,7 +335,7 @@ To find the address of `call_start_cpu0` in the MQTT project, run the following:
 xtensa-esp32-elf-objdump -d build/mqtt_tcp.elf | grep "<call_start_cpu0>:"
 ```
 
-This will return the address of `call_start_cpu0`. In my case, the address of was 0x4008122c.
+This will return the address of `call_start_cpu0`. In my case, the address was 0x4008122c.
 
 Now open `gdbinit` in VSCode and replace its contents with the following:
 
