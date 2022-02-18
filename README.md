@@ -264,13 +264,14 @@ While the procedure is somewhat unintuitive, it is still completely possible to 
 
 First, open a new terminal. Download and install ESP-IDF version v4.4 by following the instructions here: https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/get-started/index.html
 
-In Step 4, you will add environment variables to your PATH. To 
+In Step 4, you will add environment variables to your PATH by running `export.sh`. To save these changes permantently, you can modify the `bashrc` script in your home directory by running the following commands:
 
 ```
-. $HOME/esp/esp-idf/export.sh
+echo ". $HOME/esp/esp-idf/export.sh" >> $HOME/.bashrc
+source $HOME/.bashrc
 ```
 
-### Build Sample Project
+### Build a Sample Project
 
 TODO -- this step is necessary since the debugging software expects a firmware to be present in the current directory, even if that firmware is not the one we want to debug.
 
