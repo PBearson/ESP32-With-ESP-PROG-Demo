@@ -351,7 +351,7 @@ Make sure to change the second-to-last line to match the address you received.
 
 ### Enforce gdbinit Integrity
 
-It turns out that running `idf.py openocd gdb` not only reads from `gdbinit` -- it also overwrites it with the contents shown earlier. This means the changes we just made will be overwritten when we try to run GDB.
+It turns out that running `idf.py openocd gdb` not only reads from `gdbinit` -- it also overwrites it with the default contents shown earlier. This means the changes we just made will be overwritten when we try to run GDB.
 
 Luckily, there is a simple way to fix this. Open a new terminal, change into the `build` directory, and copy `gdbinit` to a new file:
 
