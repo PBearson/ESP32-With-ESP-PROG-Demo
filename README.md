@@ -55,7 +55,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
         <tr>
             <th>ESP-PROG pin</th>
             <th>ESP32 pin</th>
-            <th>ESP32-WROOM-32D Pin Layout</th>
+            <th>ESP32-WROOM-32D</th>
         </tr>
     </thead>
     <tbody>
