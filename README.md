@@ -103,19 +103,6 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
     </tbody>
 </table>
 
-| **ESP-PROG pin** | **ESP32 pin** |
-| - | - |
-| 1 (VDD) | 3.3V |
-| 2 (TMS) | 14 |
-| 3 (GND) | GND |
-| 4 (TCK) | 13 |
-| 5 (GND) | - |
-| 6 (TDO) | 15 |
-| 7 (GND) | - |
-| 8 (TDI) | 12 |
-| 9 (GND) | - |
-| 10 (NC) | - |
-
 
 ESP-PROG supports both 3.3V and 5V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** (unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32).
 
@@ -433,3 +420,16 @@ If ESP-PROG's pin header is set to 5V, we then need to change Pin 1 of ESP-PROG 
 
 ![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
+
+| **ESP-PROG pin** | **ESP32 pin** |
+| - | - |
+| 1 (VDD) | 3.3V |
+| 2 (TMS) | 14 |
+| 3 (GND) | GND |
+| 4 (TCK) | 13 |
+| 5 (GND) | - |
+| 6 (TDO) | 15 |
+| 7 (GND) | - |
+| 8 (TDI) | 12 |
+| 9 (GND) | - |
+| 10 (NC) | - |
