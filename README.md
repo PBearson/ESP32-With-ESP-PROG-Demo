@@ -50,9 +50,63 @@ ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
-| **ESP-PROG pin** | **ESP32 pin** | |
-| - | - | - |
-| 1 (VDD) | 3.3V | <img src="ESP32-WROOM-32D.jpg" width="400">|
+
+<table>
+    <thead>
+        <tr>
+            <th>ESP-PROG pin</th>
+            <th>ESP32 pin</th>
+            <th>ESP32-WROOM-32D Pin Layout</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 (VDD)</td>
+            <td>3.3V</td>
+            <td rowspan=4><img src="ESP32-WROOM-32D.jpg" width="400"></td>
+        </tr>
+        <tr>
+            <td>3 (GND) </td>
+            <td>GND</td>
+        </tr>
+        <tr>
+            <td>4 (TCK)</td>
+            <td> 13 </td>
+        </tr>
+        <tr>
+            <td>5 (GND)</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>5 (GND)</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>6 (TDO)</td>
+            <td> 15 </td>
+        </tr>
+        <tr>
+            <td>7 (GND)</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>8 (TDI)</td>
+            <td> 12 </td>
+        </tr>
+        <tr>
+            <td>9 (GND)</td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>10 (NC)</td>
+            <td> </td>
+        </tr>
+    </tbody>
+</table>
+
+| **ESP-PROG pin** | **ESP32 pin** |
+| - | - |
+| 1 (VDD) | 3.3V |
 | 2 (TMS) | 14 |
 | 3 (GND) | GND |
 | 4 (TCK) | 13 |
