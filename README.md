@@ -62,7 +62,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
         <tr>
             <td>1 (VDD)</td>
             <td>3.3V</td>
-            <td rowspan=10><img src="ESP32-WROOM-32D.jpg" width="400"></td>
+            <td rowspan=10><img src="ESP32-WROOM-32D.jpg" width="420"></td>
         </tr>
         <tr>
             <td>2 (TMS)</td>
