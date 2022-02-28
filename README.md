@@ -65,16 +65,16 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
             <td rowspan=10><img src="ESP32-WROOM-32D.jpg" width="400"></td>
         </tr>
         <tr>
+            <td>2 (TMS)</td>
+            <td> 14 </td>
+        </tr>
+        <tr>
             <td>3 (GND) </td>
             <td>GND</td>
         </tr>
         <tr>
             <td>4 (TCK)</td>
             <td> 13 </td>
-        </tr>
-        <tr>
-            <td>5 (GND)</td>
-            <td> </td>
         </tr>
         <tr>
             <td>5 (GND)</td>
