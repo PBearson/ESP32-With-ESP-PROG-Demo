@@ -52,7 +52,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 
 | **ESP-PROG pin** | **ESP32 pin** |
 | - | - |
-| 1 (VDD) | 3.3V |
+| 1 (VDD) | 3.3V | <img src="ESP32-WROOM-32D.jpg" width="400">|
 | 2 (TMS) | 14 |
 | 3 (GND) | GND |
 | 4 (TCK) | 13 |
@@ -62,7 +62,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 | 8 (TDI) | 12 |
 | 9 (GND) | - |
 | 10 (NC) | - |
-<img src="ESP32-WROOM-32D.jpg" width="400">
+
 
 ESP-PROG supports both 3.3V and 5V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** (unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32).
 
