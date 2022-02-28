@@ -47,7 +47,7 @@ You will need the following hardware to complete this project:
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
 <img src="ESP-PROG-JTAG.png" width="320">
-
+<img src="ESP32-WROOM-32D.jpg" width="320">
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
@@ -64,7 +64,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
 | 9 (GND) | - |
 | 10 (NC) | - |
 
-<img src="ESP32-WROOM-32D.jpg" width=320>
+
 
 ESP-PROG supports both 3.3V and 5V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** (unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32).
 
