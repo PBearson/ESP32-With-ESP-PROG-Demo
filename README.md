@@ -50,8 +50,8 @@ ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
-| **ESP-PROG pin** | **ESP32 pin** |
-| - | - |
+| **ESP-PROG pin** | **ESP32 pin** | |
+| - | - | - |
 | 1 (VDD) | 3.3V | <img src="ESP32-WROOM-32D.jpg" width="400">|
 | 2 (TMS) | 14 |
 | 3 (GND) | GND |
