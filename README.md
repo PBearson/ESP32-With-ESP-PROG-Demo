@@ -271,6 +271,8 @@ Now re-print the variable, and you will see it has changed:
 print i
 ```
 
+Use Step Over and run the loop for one more round. You will see that since the variable is changed, the program behavior is changed
+
 ![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png)
 
 ### Dump Memory/Firmware
