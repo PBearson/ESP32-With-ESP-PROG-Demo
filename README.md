@@ -34,8 +34,8 @@ The debugging software has a dependency on libpython2.7.so.1.0, so we need to in
 sudo apt update
 sudo apt install libpython2.7
 ```
-
-## Hardware Setup
+## Lab Setup
+### Hardware Setup
 
 You will need the following hardware to complete this project:
 
@@ -108,7 +108,7 @@ ESP-PROG supports both 3.3V and 5V. If needed, follow [this guide](https://docs.
 
 To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. You do **not** need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
-## Software Setup
+### Software Setup
 
 After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
 
@@ -116,7 +116,8 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 The USB controller may also be named **Future Devices Dual RS232-HS**
 
-Clone this GitHub project within a folder at the Ubuntu VM.
+
+## Clone this GitHub project within a folder at the Ubuntu VM.
 For example, the following commands in a terminal clone the GitHub project to /home/iot/Documents
 ```
 cd ~/Documents                                                          # change to the folder Documents within the home folder
@@ -124,11 +125,16 @@ git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone 
 ```
 where # indicates the rest of the line is comment.
 
+## Import the downloaded project into VS Code
+
+Start VS Code. 
+*File* -> *Open Folder ...* -> [Navigate to the folder ESP32-With-ESP-PROG] -> *Ok*
+
 ### Build Project
 
 To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
 
-![Build Project](https://user-images.githubusercontent.com/11084018/153796643-564e0303-0783-4845-82c2-01e46b881284.png)
+<!--- ![Build Project](https://user-images.githubusercontent.com/11084018/153796643-564e0303-0783-4845-82c2-01e46b881284.png) --->
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
