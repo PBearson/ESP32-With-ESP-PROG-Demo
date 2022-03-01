@@ -273,7 +273,7 @@ print i
 
 ![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png)
 
-### Download Firmware
+### Download Memory/Firmware
 
 A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
 
@@ -299,7 +299,8 @@ strings rodata.bin | head
 Note: By default, *strings* prints out of sequences of characters that at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
 
 
-![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png)
+<!--- ![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png) --->
+<img src="img/ram.png">
 
 ## Disable JTAG
 
