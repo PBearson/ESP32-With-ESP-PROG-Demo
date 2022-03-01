@@ -273,16 +273,22 @@ print i
 
 ![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png)
 
-### Download Memory/Firmware
+### Dump Memory/Firmware
 
 A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
 
 Section 1.3.1 of the [ESP32 technical reference manual](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf) specifies the address mapping used by the ESP32. Section 1.3.3 specifies the address mapping of external memory, including external flash and external SRAM. The program code (`.text`) and constant variables (`.rodata`) are typically stored in the external flash. Constant variables are stored in the address range 0x3F400000 to 0x3F7FFFFF, and external code is stored in the address range 0x400C2000 to 0x40BFFFFF.
 
-Now return to the Debug Console while the debugging session is active. Dump the program constants:
+Now return to the Debug Console while the debugging session is active. 
 
+Dump data in external memory:
 ```
-dump binary memory rodata.bin 0x3f400000 0x3f7fffff
+dump binary memory rodata.bin 0x3f400000 0x3fbfffff
+```
+
+Dump data in embedded memory
+```
+dump binary memory ram.bin 0x3ff80000 0x3fffffff
 ```
 
 Dump the program code:
