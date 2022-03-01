@@ -246,13 +246,14 @@ Open the source file `hello_world_main.c`. This file contains the code that is c
 
 <img src="img/Breakpoint.png">
 
-To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 34):
+To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and then presess the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
 
 ```
-hb 34
+hb 83
+continue
 ```
 
-Print the current value of `i`:
+Wait for the execution stopping at the line with the breakpoint, and print the current value of `i`:
 
 ```
 print i
