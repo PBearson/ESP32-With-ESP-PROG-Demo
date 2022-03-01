@@ -297,10 +297,10 @@ Dump the program code:
 dump binary memory text.bin 0x400c2000 0x40bfffff
 ```
 
-Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a terminal and view the file contents; for example:
+Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a terminal and view the file contents; for example, the following command finds the ssid in the data
 
 ```
-strings rodata.bin | head
+strings -n 3 rodata.bin | grep fxw
 ```
 Note: By default, *strings* prints out of sequences of characters that at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
 
