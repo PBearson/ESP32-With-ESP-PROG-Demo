@@ -24,6 +24,7 @@ See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PR
 
 The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
 
+<!...
 ## Prerequisites
 
 Download the Ubuntu VM, which already has VSCode and PlatformIO installed: https://www.dropbox.com/s/0g7w8qduzj2rb1k/UbuntuIoT.ova?dl=0
@@ -36,6 +37,8 @@ The debugging software has a dependency on libpython2.7.so.1.0, so we need to in
 sudo apt update
 sudo apt install libpython2.7
 ```
+...>
+
 ## Lab Setup
 ### Hardware Setup
 
@@ -131,7 +134,7 @@ where # indicates the rest of the line is comment.
 
 Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-With-ESP-PROG] -> *Ok*
 
-### Build Project
+## Build Project
 
 To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
 
@@ -139,7 +142,7 @@ To build the project, open the PlatformIO menu by clicking on its icon, and unde
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
-### Upload Firmware
+## Upload Firmware
 
 To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
 
