@@ -46,7 +46,7 @@ You will need the following hardware to complete this project:
 
 ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
-<img src="ESP-PROG-JTAG.png" width="320">
+<img src="img/ESP-PROG-JTAG.png" width="320">
 
 To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused.
 
@@ -62,7 +62,7 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
         <tr>
             <td>1 (VDD)</td>
             <td>3.3V</td>
-            <td rowspan=10><img src="ESP32-WROOM-32D.jpg" width="450"></td>
+            <td rowspan=10><img src="img/ESP32-WROOM-32D.jpg" width="450"></td>
         </tr>
         <tr>
             <td>2 (TMS)</td>
