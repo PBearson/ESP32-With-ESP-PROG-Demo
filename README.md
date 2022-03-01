@@ -183,7 +183,7 @@ Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** 
 <img src="img/Debug-Console.png"> 
 
 ### Debugging Examples
-**Since GDB is actually used for debugging, we actually enter GDB commands in the debug console.**
+**Since GDB is used for debugging, we actually enter GDB commands in the debug console.**
 
 To illustrate a simple example of how to debug a program, we will place a hardware assisted breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
 
