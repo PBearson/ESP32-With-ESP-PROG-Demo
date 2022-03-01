@@ -1,6 +1,7 @@
 # ESP32-With-ESP-PROG-Demo
 Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is part of a course at University of Massachusetts Lowell, and some details may need to be changed to work for other readers.
 
+<!---
 ## Table of Contents
 
 1. [Overview](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#overview)
@@ -11,6 +12,7 @@ Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is par
 6. [Disable JTAG](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#disable-jtag)
 7. [Use JTAG Without the Firmware](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#use-jtag-without-the-firmware)
 8. [Notes](https://github.com/PBearson/ESP32-With-ESP-PROG-Demo#notes)
+--->
 
 ## Overview
 
