@@ -116,28 +116,21 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 
 The USB controller may also be named **Future Devices Dual RS232-HS**
 
-Open VSCode. We are going to import an example "hello world" project into our workspace. Click on the PlatformIO icon on the left side of the screen. In the `Quick Access` tab, click on `PIO Home -> Open` to open the PIO Home page. The screenshot below shows how to do this:
+Clone this GitHub project within a folder at the Ubuntu VM.
+For example, the following commands in a terminal delete the old ota folder and clone the GitHub project to /home/iot/Documents
 
-![Open PIO Home](https://user-images.githubusercontent.com/11084018/153796619-b1bdca9d-b231-451e-8597-e3abfddc1d2c.png)
+cd ~/Documents                                  # change to the folder Documents within the home folder
+rm -rf ota                                      # delete the old ota folder
+git clone https://github.com/xinwenfu/ota.git   # clone the github repository
+where # indicates the rest of the line is comment.
 
-Click on `Project Examples`, and type `espidf-hello-world`. Select it, then hit `import`. This will install the project into your workspace. 
-
-By default, the file `platformio.ini` should open, but if not, you can easily open it by clicking the Explorer icon on the left side of the screen, which will show all files in this project.
-
-Replace the contents of `platformio.ini` with the following:
-
+Clone this GitHub project within a folder at the Ubuntu VM.
+For example, the following commands in a terminal delete the old ota folder and clone the GitHub project to /home/iot/Documents
 ```
-[env]
-platform = espressif32
-framework = espidf
-monitor_speed = 115200
-
-[env:hiletgo-with-jtag]
-board = esp32dev
-debug_tool = esp-prog
-upload_protocol = esp-prog
-debug_init_break = tbreak app_main
+cd ~/Documents                                  # change to the folder Documents within the home folder
+git clone https://github.com/xinwenfu/ota.git   # clone the github repository
 ```
+where # indicates the rest of the line is comment.
 
 ### Build Project
 
