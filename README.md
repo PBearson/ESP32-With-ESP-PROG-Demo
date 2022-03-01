@@ -244,7 +244,7 @@ The program will crash because it tries to execute at address 0x0. However, no i
 
 Open the source file `hello_world_main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following for loop: 
 
-![image](https://user-images.githubusercontent.com/11084018/153785433-882f6f93-20c0-493d-8794-408859a71439.png)
+<img src="img/Breakpoint.png">
 
 To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 34):
 
