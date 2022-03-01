@@ -284,7 +284,7 @@ Section 1.3.1 of the [ESP32 technical reference manual](https://www.espressif.co
 
 Now return to the Debug Console while the debugging session is active. 
 
-Dump data in external memory:
+Dump data in external memory, which shall include all data of the firmware:
 ```
 dump binary memory rodata.bin 0x3f400000 0x3fbfffff
 ```
