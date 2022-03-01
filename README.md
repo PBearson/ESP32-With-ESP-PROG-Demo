@@ -286,7 +286,7 @@ Dump data in external memory:
 dump binary memory rodata.bin 0x3f400000 0x3fbfffff
 ```
 
-Dump data in embedded memory
+Dump data in embedded memory:
 ```
 dump binary memory ram.bin 0x3ff80000 0x3fffffff
 ```
