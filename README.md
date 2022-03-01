@@ -143,6 +143,28 @@ To upload the firmware, select the `Upload` task from the previous menu. Since w
 
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153781182-b54333ed-7d73-4630-91bc-1a9e9817517c.png) --->
 
+Below is the platformio.ini of this project.
+```
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; https://docs.platformio.org/page/projectconf.html
+
+[env:esp32dev]
+platform = espressif32
+board = esp32dev
+framework = espidf
+monitor_speed = 115200
+debug_tool = esp-prog               ; debug_tool is set to esp-prog
+upload_protocol = esp-prog          ; upload protocol is set to esp-prog
+debug_init_break = tbreak app_main  ; initial breakpoint on the function app_main
+```
+
 ## Debugging
 
 ### Launch Debugger
