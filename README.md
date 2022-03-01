@@ -117,18 +117,10 @@ After connecting the ESP-PROG to the computer, make sure your Operating System c
 The USB controller may also be named **Future Devices Dual RS232-HS**
 
 Clone this GitHub project within a folder at the Ubuntu VM.
-For example, the following commands in a terminal delete the old ota folder and clone the GitHub project to /home/iot/Documents
-
-cd ~/Documents                                  # change to the folder Documents within the home folder
-rm -rf ota                                      # delete the old ota folder
-git clone https://github.com/xinwenfu/ota.git   # clone the github repository
-where # indicates the rest of the line is comment.
-
-Clone this GitHub project within a folder at the Ubuntu VM.
-For example, the following commands in a terminal delete the old ota folder and clone the GitHub project to /home/iot/Documents
+For example, the following commands in a terminal clone the GitHub project to /home/iot/Documents
 ```
-cd ~/Documents                                  # change to the folder Documents within the home folder
-git clone https://github.com/xinwenfu/ota.git   # clone the github repository
+cd ~/Documents                                                          # change to the folder Documents within the home folder
+git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
 ```
 where # indicates the rest of the line is comment.
 
