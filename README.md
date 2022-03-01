@@ -141,7 +141,7 @@ A terminal will open, and you will see the output from the build task. After a f
 
 To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
 
-![image](https://user-images.githubusercontent.com/11084018/153781182-b54333ed-7d73-4630-91bc-1a9e9817517c.png)
+<img src="img/Upload.png"> 
 
 Below is the platformio.ini of this project.
 ```
