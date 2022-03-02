@@ -185,47 +185,41 @@ Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** 
 
 <img src="img/Debug-Console.png"> 
 
-### Debugging Examples
-**Since GDB is used for debugging, we actually enter GDB commands in the debug console.**
 
+8. Change Memory
+**Since GDB is used for debugging, we actually enter GDB commands in the debug console**.
 
-### Change Memory
-
-Open the source file `hello_world_main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following for loop: 
+Click and open the source code file `main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following *for* loop: 
 
 <img src="img/Breakpoint.png">
 
-To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and then presess the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
-
+To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and a red dot representing the breakpoint shall show up. Then presess the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
 ```
 hb 83
 continue
 ```
 
 Wait for the execution stopping at the line with the breakpoint, and print the current value of `i`:
-
 ```
 print i
 ```
 
 Now modify the value of `i`. For example, you can see it to 100:
-
 ```
 set variable i = 100
 ```
 
 Now re-print the variable, and you will see it has changed:
-
 ```
 print i
 ```
 
-Use Step Over or Continue and run the loop for one more round. You will see that since the variable is changed, the program behavior is changed
+Use *Step Over* or *Continue* and run the loop for one more round. You will see that the variable *i* is changed and thus the program behavior is changed.
 
 <img src="img/Debug-Change-i.png">
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png) --->
 
-### Dump Memory/Firmware
+9. Dump Memory/Firmware
 
 A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
 
