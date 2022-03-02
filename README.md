@@ -252,25 +252,6 @@ Note: By default, *strings* prints out of sequences of characters that at least 
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png) --->
 <img src="img/ram.png">
 
-## Disable JTAG
-
-In production environments, it is **heavily** recommended that the user disables the JTAG functionality. To do so, open a new terminal and install the `esptool` suite of tools:
-
-```
-sudo apt install esptool
-```
-
-One of the installed tools is `espefuse`, which provides read and write access to the ESP32's **eFuses**, which is a special kind of nonvolatile memory with the following restriction: once an eFuse bit is set to 1, it can never be set back to 0. One of these eFuses is `JTAG_DISABLE`, a single-bit fuse that controls access to the JTAG interface. By default, `JTAG_DIABLE` is set to 0. Setting it to 1 shall disable the JTAG access. _**This process is irreversible.**_
-
-Unplug the USB cable from the ESP-PROG, and plug in the ESP32. Ensure the USB controller is connected to your VM.
-
-In the terminal we just opened, type the following to disable JTAG:
-
-```
-espefuse burn_efuse JTAG_DISABLE
-```
-
-The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with the process.
 
 ## Use JTAG Without the Firmware
 
@@ -379,6 +360,27 @@ Return to the first terminal and run `idf.py openocd gdb` one last time. Hopeful
 At this point, we can perform nearly all of the same debugging commands that were shown before. The only differences are 1) we do not have access to symbol information, and 2) we have hit a breakpoint in `call_start_cpu0` instead of `app_main`. We can still read/write registers and memory, as well as dump the memory contents to a file. We can also disassemble the current function:
 
 ![image](https://user-images.githubusercontent.com/11084018/154613892-ccc695ab-1e31-4cfd-a7b1-47abb42692a7.png)
+
+## Disable JTAG
+
+In production environments, it is **heavily** recommended that the user disables the JTAG functionality. To do so, open a new terminal and install the `esptool` suite of tools:
+
+```
+sudo apt install esptool
+```
+
+One of the installed tools is `espefuse`, which provides read and write access to the ESP32's **eFuses**, which is a special kind of nonvolatile memory with the following restriction: once an eFuse bit is set to 1, it can never be set back to 0. One of these eFuses is `JTAG_DISABLE`, a single-bit fuse that controls access to the JTAG interface. By default, `JTAG_DIABLE` is set to 0. Setting it to 1 shall disable the JTAG access. _**This process is irreversible.**_
+
+Unplug the USB cable from the ESP-PROG, and plug in the ESP32. Ensure the USB controller is connected to your VM.
+
+In the terminal we just opened, type the following to disable JTAG:
+
+```
+espefuse burn_efuse JTAG_DISABLE
+```
+
+The prompt will warn you that the operation is irreversible. You are instructed to type `BURN` if you want to proceed with the process.
+
 
 ## Notes:
 
