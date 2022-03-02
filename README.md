@@ -248,10 +248,14 @@ strings -n 3 rodata.bin | grep fxw
 ```
 Note: By default, *strings* prints out of sequences of characters that at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
 
-
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png) --->
 <img src="img/ram.png">
 
+A hex editor (e.g. wxhexeditor) on Ubuntu can also be used to search the WiFi credentials in the dump. Please check if /usr/bin/wxHexEditor and /usr/bin/wxhexeditor exist on Ubuntu. If needed, the following commands show how to install and configure wxhexeditor.
+```
+sudo apt-get install wxhexeditor                        # Install wxhexeditor  and then run wxHexEditor
+sudo ln -s /usr/bin/wxHexEditor /usr/bin/wxhexeditor    # Create a symbolic to use the lowercase command wxhexeditor
+```
 
 ## Use JTAG Without the Firmware
 
