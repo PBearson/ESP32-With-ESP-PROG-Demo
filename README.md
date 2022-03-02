@@ -253,7 +253,7 @@ Note: By default, *strings* prints out of sequences of characters that at least 
 
 A hex editor (e.g. wxhexeditor) on Ubuntu can also be used to search the WiFi credentials in the dump. Please check if */usr/bin/wxHexEditor* and */usr/bin/wxhexeditor* exist on Ubuntu. If needed, the following commands show how to install and configure wxhexeditor.
 ```
-sudo apt-get install wxhexeditor                        # Install wxhexeditor  and then run wxHexEditor
+sudo apt-get install wxhexeditor                        # Install wxhexeditor
 sudo ln -s /usr/bin/wxHexEditor /usr/bin/wxhexeditor    # Create a symbolic to use the lowercase command wxhexeditor
 ```
 
