@@ -137,7 +137,7 @@ Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-Wi
 
 5. Build Project
 
-To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
+To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `General -> Build`.
 
 <img src="img/VS-Code-Build-Debug.png">
 
