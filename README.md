@@ -1,4 +1,4 @@
-# ESP32-With-ESP-PROG-Demo
+# Debugging ESP32 App with ESP-PROG 
 Debug your embedded software with ESP32, ESP-PROG, and JTAG. This project is part of a course at University of Massachusetts Lowell, and some details may need to be changed to work for other readers.
 
 <!---
