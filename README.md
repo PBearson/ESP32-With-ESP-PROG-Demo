@@ -257,6 +257,35 @@ sudo apt-get install wxhexeditor                        # Install wxhexeditor
 sudo ln -s /usr/bin/wxHexEditor /usr/bin/wxhexeditor    # Create a symbolic to use the lowercase command wxhexeditor
 ```
 
+10. Change Registers
+
+We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
+
+```
+set $a8=12345678
+```
+
+Now print the value of A8, in both hexadecimal and decimal format:
+
+```
+i r a8
+```
+
+You can even modify the instruction pointer using this method:
+
+```
+set $pc=0
+```
+
+Now continue the program:
+
+```
+cont
+```
+
+The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
+
+
 ## Use JTAG Without the Firmware
 
 Up until now, we assumed that the firmware on the ESP32 was built and uploaded by us. But what if we do not have access to the source code, and the ESP32 is running some firmware that is unknown to us? Can we still use JTAG to debug the device?
