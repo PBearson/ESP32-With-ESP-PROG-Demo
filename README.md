@@ -22,7 +22,7 @@ See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PR
 
 <img src="img/ESP-PROG.jpg"> 
 
-The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will import an example ESP32 project into our workspace, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
+The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device and security implications of a JTAG interface on an IoT device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will download the project in this GitHub repository, load it into VS Code, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
 
 <!---
 ## Prerequisites
@@ -40,7 +40,7 @@ sudo apt install libpython2.7
 --->
 
 ## Lab Setup
-### Hardware Setup
+1. Hardware Setup
 
 You will need the following hardware to complete this project:
 
@@ -108,33 +108,36 @@ To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that fou
     </tbody>
 </table>
 
-
-ESP-PROG supports both 3.3V and 5V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** (unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32).
+Note: ESP-PROG supports both 3.3V and 5V. We assume the pin header is set to use the voltage level of 3.3V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32.
 
 To connect the devices to your host computer, you can connect the ESP-PROG to the computer directly via a USB cable. You do **not** need to connect the ESP32 to your computer directly. It will receive power from the ESP-PROG via the VDD pin. The JTAG interface also enables programming capabilities for uploading the application to the ESP32, so there is no need to connect to the UART controller on the development board.
 
-### Software Setup
+**Double check the wiring**.
 
-After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine:
+2. Software Setup
+
+After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine while this is our default setting:
 
 * **Devices -> USB -> FTDI Dual RS232-HS**
 
 The USB controller may also be named **Future Devices Dual RS232-HS**
 
 
-## Clone this GitHub project within a folder at the Ubuntu VM.
+3. Clone this GitHub project within a folder at the Ubuntu VM.
 For example, the following commands in a terminal clone the GitHub project to /home/iot/Documents
 ```
 cd ~/Documents                                                          # change to the folder Documents within the home folder
+rm -rf ESP32-With-ESP-PROG-Demo                                         # delete the old folder of this project if needed
 git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
 ```
 where # indicates the rest of the line is comment.
 
-## Import the downloaded project into VS Code
+## Import, build and upload the project
+4. Import the downloaded project into VS Code
 
 Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-With-ESP-PROG] -> *Ok*
 
-## Build Project
+5. Build Project
 
 To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `hiletgo-with-jtag -> General -> Build`.
 
@@ -142,7 +145,7 @@ To build the project, open the PlatformIO menu by clicking on its icon, and unde
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
-## Upload Firmware
+6. Upload Firmware
 
 To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
 
@@ -172,7 +175,7 @@ debug_init_break = tbreak app_main  ; initial breakpoint on the function app_mai
 
 ## Debugging
 
-### Launch Debugger
+7. Launch Debugger
 
 To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the dropdown menu and choose the option `PIO Debug (skip Pre-Debug) ...`.
 
@@ -185,66 +188,6 @@ Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** 
 ### Debugging Examples
 **Since GDB is used for debugging, we actually enter GDB commands in the debug console.**
 
-To illustrate a simple example of how to debug a program, we will place a hardware assisted breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
-
-```
-hb printf
-```
-
-Now run the program until it reaches this function:
-
-```
-cont
-```
-
-The ESP32 architecture (Xtensa LX6) contains an `entry` instruction at the beginning of most subroutines. This instruction modifies an internal mechanism of the ESP32 called the **register window**, allowing the current subroutine to access its arguments. In order to view the arguments passed to `printf` (in this case, the string that will be printed out to the console), we need to first execute the `entry` instruction. To do this, run the following:
-
-```
-nexti
-```
-
-Now you can view the arguments passed to `printf`:
-
-```
-i args
-```
-
-![image](https://user-images.githubusercontent.com/11084018/153783242-2ae7b69d-25e6-48b8-b076-8a97098a04a0.png)
-
-Our breakpoint still exists, so we can continue (`c`) the program until it re-enters `printf` again. Then, we can execute `entry` (`nexti`) before checking the arguments again. Now you will see that the string has updated.
-
-Here are a couple other useful commands you should know about:
-* To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
-* To view the backtrace of the call stack, type `bt`.
-* To view registers, type `i r`.
-
-### Change Registers
-
-We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
-
-```
-set $a8=12345678
-```
-
-Now print the value of A8, in both hexadecimal and decimal format:
-
-```
-i r a8
-```
-
-You can even modify the instruction pointer using this method:
-
-```
-set $pc=0
-```
-
-Now continue the program:
-
-```
-cont
-```
-
-The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
 
 ### Change Memory
 
@@ -447,20 +390,73 @@ At this point, we can perform nearly all of the same debugging commands that wer
 
 ## Notes:
 
-If ESP-PROG's pin header is set to 5V, we then need to change Pin 1 of ESP-PROG to the 5V pin of ESP32.
+### Pin header set to 5V
+
+If ESP-PROG's pin header is set to 5V, we then need to connect Pin 1 of ESP-PROG to the 5V pin of ESP32.
 
 ![HiLetgo with ESP-PROG](https://user-images.githubusercontent.com/11084018/153796531-704a58bf-50ef-4992-ae5d-9f0b53731219.png)
 
 
-| **ESP-PROG pin** | **ESP32 pin** |
-| - | - |
-| 1 (VDD) | 3.3V |
-| 2 (TMS) | 14 |
-| 3 (GND) | GND |
-| 4 (TCK) | 13 |
-| 5 (GND) | - |
-| 6 (TDO) | 15 |
-| 7 (GND) | - |
-| 8 (TDI) | 12 |
-| 9 (GND) | - |
-| 10 (NC) | - |
+
+### Another debugging example
+
+To illustrate a simple example of how to debug a program, we will place a hardware assisted breakpoint in a function and analyze the program when it reaches that function. In the Debug Console, place a breakpoint in the `printf` function:
+
+```
+hb printf
+```
+
+Now run the program until it reaches this function:
+
+```
+cont
+```
+
+The ESP32 architecture (Xtensa LX6) contains an `entry` instruction at the beginning of most subroutines. This instruction modifies an internal mechanism of the ESP32 called the **register window**, allowing the current subroutine to access its arguments. In order to view the arguments passed to `printf` (in this case, the string that will be printed out to the console), we need to first execute the `entry` instruction. To do this, run the following:
+
+```
+nexti
+```
+
+Now you can view the arguments passed to `printf`:
+
+```
+i args
+```
+
+![image](https://user-images.githubusercontent.com/11084018/153783242-2ae7b69d-25e6-48b8-b076-8a97098a04a0.png)
+
+Our breakpoint still exists, so we can continue (`c`) the program until it re-enters `printf` again. Then, we can execute `entry` (`nexti`) before checking the arguments again. Now you will see that the string has updated.
+
+Here are a couple other useful commands you should know about:
+* To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
+* To view the backtrace of the call stack, type `bt`.
+* To view registers, type `i r`.
+
+### Change Registers
+
+We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
+
+```
+set $a8=12345678
+```
+
+Now print the value of A8, in both hexadecimal and decimal format:
+
+```
+i r a8
+```
+
+You can even modify the instruction pointer using this method:
+
+```
+set $pc=0
+```
+
+Now continue the program:
+
+```
+cont
+```
+
+The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
