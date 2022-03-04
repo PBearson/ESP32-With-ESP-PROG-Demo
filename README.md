@@ -198,6 +198,7 @@ To show an example of how to modify memory, we are going to enter this loop and 
 hb 83
 continue
 ```
+where *hb* sets a hardware-assisted breakpoint.
 
 Wait for the execution stopping at the line with the breakpoint, and print the current value of `i`:
 ```
@@ -223,8 +224,10 @@ Use *Step Over* or *Continue* and run the loop for one more round. You will see 
 
 A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
 
-Section 1.3.1 of the [ESP32 technical reference manual](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf) specifies the address mapping used by the ESP32. Section 1.3.3 specifies the address mapping of external memory, including external flash and external SRAM. The program code (`.text`) and constant variables (`.rodata`) are typically stored in the external flash. Constant variables are stored in the address range 0x3F400000 to 0x3F7FFFFF, and external code is stored in the address range 0x400C2000 to 0x40BFFFFF.
-
+Section 1.3.1 of the [ESP32 technical reference manual](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf) specifies the address mapping used by the ESP32. Section 1.3.3 specifies the address mapping of external memory, including external flash and external SRAM. 
+<!---
+The program code (`.text`) and constant variables (`.rodata`) are typically stored in the external flash. Constant variables are stored in the address range 0x3F400000 to 0x3F7FFFFF, and external code is stored in the address range 0x400C2000 to 0x40BFFFFF.
+--->
 Now return to the Debug Console while the debugging session is active. 
 
 Dump data in external memory, which shall include all data of the firmware:
