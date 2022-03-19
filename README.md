@@ -230,6 +230,8 @@ The program code (`.text`) and constant variables (`.rodata`) are typically stor
 --->
 Now return to the Debug Console while the debugging session is active. 
 
+During the dumping process, you may see errors. Just ignore them.
+
 Dump data in external memory, which shall include all data of the firmware:
 ```
 dump binary memory rodata.bin 0x3f400000 0x3fbfffff
