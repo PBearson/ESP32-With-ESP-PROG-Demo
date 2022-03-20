@@ -253,7 +253,7 @@ Most likely, the majority of both files will be empty, since this application is
 ```
 strings -n 3 rodata.bin | grep fxw
 ```
-Note: By default, *strings* prints out of sequences of characters that at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
+Note: By default, *strings* prints out of sequences of characters that are at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
 
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153796456-47d2c80d-12b8-43b4-8da5-3bd936651614.png) --->
 <img src="img/ram.png">
