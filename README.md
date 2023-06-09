@@ -130,7 +130,7 @@ cd ~/Documents                                                          # change
 rm -rf ESP32-With-ESP-PROG-Demo                                         # delete the old folder of this project if needed
 git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
 ```
-where # indicates the rest of the line is comment.
+Where # indicates the rest of the line is comment.
 
 ## Import, build and upload the project
 4. Import the downloaded project into VS Code
@@ -139,46 +139,36 @@ Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-Wi
 
 5. Build Project
 
-To build the project, open the PlatformIO menu by clicking on its icon, and under the `Project Tasks` tab, select `General -> Build`.
+To build the project, use the *esp-idf* build button located at the bottom of the screen or open a esp-idf *terminal* and use to ``` idf.py build ``` command.
 
 <img src="img/VS-Code-Build-Debug.png">
 
 A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
-6. Upload Firmware
+1. Upload Firmware
 
-To upload the firmware, select the `Upload` task from the previous menu. Since we configured `platformio.ini` to use ESP-PROG, the upload task will use JTAG (rather than the default UART) to upload the firmware binary. You will see in the terminal that PlatformIO uses the Open On-chip Debugger (OpenOCD) software to communicate to the ESP-PROG. After a short time, the upload should succeed.
+To upload the firmware, select the `Flash` task at the bottom of the screen. We will need to select *JTAG* and the appropriate source directory. We can also flash the board with the command listed below.
+    
+    <img src="img/Upload.png"> 
 
-<img src="img/Upload.png"> 
-
-Below is the platformio.ini of this project.
-```
-; PlatformIO Project Configuration File
-;
-;   Build options: build flags, source filter
-;   Upload options: custom upload port, speed and extra flags
-;   Library options: dependencies, extra library storages
-;   Advanced options: extra scripting
-;
-; Please visit documentation for the other options and examples
-; https://docs.platformio.org/page/projectconf.html
-
-[env:esp32dev]
-platform = espressif32
-board = esp32dev
-framework = espidf
-monitor_speed = 115200
-debug_tool = esp-prog               ; debug_tool is set to esp-prog
-upload_protocol = esp-prog          ; upload protocol is set to esp-prog
-debug_init_break = tbreak app_main  ; initial breakpoint on the function app_main
-```
+    ```sh
+    openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+    ```
 
 ## Debugging
 
 7. Launch Debugger
 
-To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the dropdown menu and choose the option `PIO Debug (skip Pre-Debug) ...`.
+   1. To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the *Create a launch.json file* option and configure it using the following options. **Notice** depending on your installation the path to the GDB binary used by esp-idf may change.
 
+    ```conf
+    <INSERT launch.json>
+    ```
+    2. In ``` .vscode ``` create a new file ``` tasks.json ``` and fill it in the the following 
+    ```conf
+    
+    ```
+    3. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
 <img src="img/Run-and-Debug.png">
 
 Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
