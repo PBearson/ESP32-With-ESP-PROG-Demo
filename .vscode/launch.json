@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name":           "ESP_OpenOCD",                        // name to refer to config
+            "type":           "cppdbg",                             // Type of config
+            "request":        "launch",                             // action
+            "cwd":            "${workspaceFolder}/build",           // Current Working Directoty (where to base)
+            "program":        "${workspaceFolder}/build/esp32-test-01.elf", // Change hello.elf to be project name
+            "miDebuggerPath": "/home/iot/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/", // ESP 4.4 path
+            "setupCommands": [
+                { 
+                    "text":"target remote 127.0.0.1:3333" // How this will locate the openocd degugger 
+                },
+                { 
+                    "text": "set remote hardware-watchpoint-limit 2" // Set hardware breakpoint limit Look at docs for the limit
+                },
+                {
+                    "text": "monitor reset halt"
+                },
+                {
+                    "text": "flushregs" // Flush internal cache 
+                }
+
+            ]
+        }
+
+    ]
+}
