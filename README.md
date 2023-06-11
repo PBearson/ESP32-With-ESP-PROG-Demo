@@ -44,71 +44,71 @@ sudo apt install libpython2.7
 ## Lab Setup
 1. Hardware Setup
 
-You will need the following hardware to complete this project:
+    You will need the following hardware to complete this project:
 
-* A Hiletgo ESP32-WROOM-32 development board
-* ESP-PROG
-* 1 USB cable
-* 6 male-to-female jumper wires
+    * A Hiletgo ESP32-WROOM-32 development board
+    * ESP-PROG
+    * 1 USB cable
+    * 6 male-to-female jumper wires
 
-ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
+    ESP-PROG contains a 10-pin header which allows wiring to the JTAG interface. For reference, each pin on the header is numbered in the figure below: 
 
-<img src="img/ESP-PROG-JTAG.png" width="320">
+    <img src="img/ESP-PROG-JTAG.png" width="320">
 
-To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused. **Double check the wiring**.
+    To wire the ESP32 to the ESP-PROG, use the table below as a guide. Note that four of the pins on the headers will go unused. **Double check the wiring**.
 
-<table>
-    <thead>
-        <tr>
-            <th>ESP-PROG pin</th>
-            <th>ESP32 pin</th>
-            <th>ESP32-WROOM-32D</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1 (VDD)</td>
-            <td>3.3V</td>
-            <td rowspan=10><img src="img/ESP32-WROOM-32D.jpg" width="450"></td>
-        </tr>
-        <tr>
-            <td>2 (TMS)</td>
-            <td> 14 </td>
-        </tr>
-        <tr>
-            <td>3 (GND) </td>
-            <td>GND</td>
-        </tr>
-        <tr>
-            <td>4 (TCK)</td>
-            <td> 13 </td>
-        </tr>
-        <tr>
-            <td>5 (GND)</td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>6 (TDO)</td>
-            <td> 15 </td>
-        </tr>
-        <tr>
-            <td>7 (GND)</td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>8 (TDI)</td>
-            <td> 12 </td>
-        </tr>
-        <tr>
-            <td>9 (GND)</td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>10 (NC)</td>
-            <td> </td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>ESP-PROG pin</th>
+                <th>ESP32 pin</th>
+                <th>ESP32-WROOM-32D</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1 (VDD)</td>
+                <td>3.3V</td>
+                <td rowspan=10><img src="img/ESP32-WROOM-32D.jpg" width="450"></td>
+            </tr>
+            <tr>
+                <td>2 (TMS)</td>
+                <td> 14 </td>
+            </tr>
+            <tr>
+                <td>3 (GND) </td>
+                <td>GND</td>
+            </tr>
+            <tr>
+                <td>4 (TCK)</td>
+                <td> 13 </td>
+            </tr>
+            <tr>
+                <td>5 (GND)</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>6 (TDO)</td>
+                <td> 15 </td>
+            </tr>
+            <tr>
+                <td>7 (GND)</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>8 (TDI)</td>
+                <td> 12 </td>
+            </tr>
+            <tr>
+                <td>9 (GND)</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>10 (NC)</td>
+                <td> </td>
+            </tr>
+        </tbody>
+    </table>
 
 Note: ESP-PROG supports both 3.3V and 5V. We assume the pin header is set to use the voltage level of 3.3V. If needed, follow [this guide](https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/hw-reference/ESP-Prog_guide.html#pin-headers) to select 3.3V for the JTAG interface. **JTAG will not work if 5V is selected** unless you swap ESP-PROG's VDD pin to the 5V pin of ESP32.
 
@@ -116,14 +116,14 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 2. Software Setup
 
-After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine while this is our default setting:
+    After connecting the ESP-PROG to the computer, make sure your Operating System can see the USB controller (FTDI). In VirtualBox, you should attach the following USB controller to your virtual machine while this is our default setting:
 
-* **Devices -> USB -> FTDI Dual RS232-HS**
+    * **Devices -> USB -> FTDI Dual RS232-HS**
 
-The USB controller may also be named **Future Devices Dual RS232-HS**
+    The USB controller may also be named **Future Devices Dual RS232-HS**
 
 
-3. Clone this GitHub project within a folder at the Ubuntu VM.
+1. Clone this GitHub project within a folder at the Ubuntu VM.
 For example, the following commands in a terminal clone the GitHub project to /home/iot/Documents
 ```
 cd ~/Documents                                                          # change to the folder Documents within the home folder
@@ -133,76 +133,128 @@ git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone 
 Where # indicates the rest of the line is comment.
 
 ## Import, build and upload the project
-4. Import the downloaded project into VS Code
+1. Import the downloaded project into VS Code
 
-Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-With-ESP-PROG] -> *Ok*
+    Start VS Code -> *File* -> *Open Folder ...* -> [Navigate to the folder ESP32-With-ESP-PROG] -> *Ok*
 
-5. Build Project
+2. Build Project
 
-To build the project, use the *esp-idf* build button located at the bottom of the screen or open a esp-idf *terminal* and use to ``` idf.py build ``` command.
+    To build the project, use the *esp-idf* build button located at the bottom of the screen or open a esp-idf *terminal* and use to ``` idf.py build ``` command.
 
-<img src="img/VS-Code-Build-Debug.png">
+    <img src="img/VS-Code-Build-Debug.png">
 
-A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
+    A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
-1. Upload Firmware
+3. Upload Firmware
 
-To upload the firmware, select the `Flash` task at the bottom of the screen. We will need to select *JTAG* and the appropriate source directory. We can also flash the board with the command listed below.
-    
-    <img src="img/Upload.png"> 
+    To upload the firmware, select the `Flash` task at the bottom of the screen. We will need to select *JTAG* and the appropriate source directory. We can also flash the board with the command listed below.
+        
+        <img src="img/Upload.png"> 
 
-    ```sh
-    openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
-    ```
+        ```sh
+        openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+        ```
+    * If errors occur, hit the **EN** button on the ESP32 (Sometimes the ESP32 halts after an upload)
 
 ## Debugging
 
-7. Launch Debugger
+**Note to Matt (self)**: May want to move to https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/debugging.md
+
+We currently use a version shown at https://www.youtube.com/watch?v=uq93H7T7cOQ
+1. Launch Debugger
 
    1. To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the *Create a launch.json file* option and configure it using the following options. **Notice** depending on your installation the path to the GDB binary used by esp-idf may change.
 
     ```conf
-    <INSERT launch.json>
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "preLaunchTask": "preRun",
+                "name":           "ESP_OpenOCD",                        // name to refer to config
+                "type":           "cppdbg",                             // Type of config
+                "request":        "launch",                             // action
+                "cwd":            "${workspaceFolder}/build",           // Current Working Directoty (where to base)
+                "program":        "${workspaceFolder}/build/esp32-test-01.elf", // Change hello.elf to be project name
+                "miDebuggerPath": "/home/iot/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gdb", // ESP 4.4 path
+                "setupCommands": [
+                    { 
+                        "text":"target remote 127.0.0.1:3333" // How this will locate the openocd degugger 
+                    },
+                    { 
+                        "text": "set remote hardware-watchpoint-limit 2" // Set hardware breakpoint limit Look at docs for the limit
+                    },
+                    {
+                        "text": "monitor reset halt"
+                    },
+                    {
+                        "text": "flushregs" // Flush internal cache 
+                    }
+
+                ]
+            }
+
+        ]
+    }
     ```
     2. In ``` .vscode ``` create a new file ``` tasks.json ``` and fill it in the the following 
     ```conf
-    
+    { 
+        "version": "2.0.0.",
+        "tasks": 
+        [ 
+            {
+                "label":"preRun",
+                "type":"shell",
+                "linux": {
+                    // Add -c \"set ESP_RTOS none\"  if there are inconsistancies (VSCode fails to keep track of threads sometimes)
+                    "command": "clear & start openocd -c \"set ESP_RTOS none\" -f board/esp32-wrover-kit-3.3v.cfg & exit"
+                }
+            }
+        ]
+    }
+
     ```
-    3. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
+    3. Set Breakpoints 
+        * With the main program open ``` main/main.c ``` on the left hand side of the screen set a breakpoint at the *for loop* as shown below (left click) and at the start of *app_main*.
+        <img src="setBP.png">
+    4. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
+        * If errors occur, hit the **EN** button on the ESP32 (Sometimes the ESP32 halts after an upload)
 <img src="img/Run-and-Debug.png">
 
-Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint in the main function of our application (`app_main`). We added this breakpoint when we added the line `debug_init_break = tbreak app_main` to `platformio.ini`. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
+    Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint at the main function of our application (`app_main`). We added this breakpoint when we clicker on the left hand margin of the line containing ```void app_main()``` and created the red dot. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
 
-<img src="img/Debug-Console.png"> 
+    <img src="img/Debug-Console.png"> 
 
 
-8. Change Memory
-**Since GDB is used for debugging, we actually enter GDB commands in the debug console**.
+### Change Memory
+**Since GDB is used for debugging, we can enter GDB commands in the debug console**. This is possible with the **-exec** flag.
 
 Click and open the source code file `main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following *for* loop: 
 
 <img src="img/Breakpoint.png">
 
 To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and a red dot representing the breakpoint shall show up. Then presess the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
-```
-hb 83
-continue
+
+```sh
+-exec hb 83
+-exec continue
 ```
 where *hb* sets a hardware-assisted breakpoint.
 
 Wait for the execution stopping at the line with the breakpoint, and print the current value of `i`:
-```
-print i
+```sh
+-exec print i
 ```
 
 Now modify the value of `i`. For example, you can see it to 100:
-```
-set variable i = 100
+```sh
+-exec set variable i = 100
 ```
 
 Now re-print the variable, and you will see it has changed:
-```
-print i
+```sh
+-exec print i
 ```
 
 Use *Step Over* or *Continue* and run the loop for one more round. You will see that the variable *i* is changed and thus the program behavior is changed.
@@ -210,7 +262,7 @@ Use *Step Over* or *Continue* and run the loop for one more round. You will see 
 <img src="img/Debug-Change-i.png">
 <!--- ![image](https://user-images.githubusercontent.com/11084018/153786790-32d0722c-b2cb-43ea-b607-f883d054626a.png) --->
 
-9. Dump Memory/Firmware
+### Dump Memory/Firmware
 
 A more advanced usage of debugging is to dump the memory contents, which can effectively recover the firmware. The ESP32 address space ranges from 0x0 to 0xFFFFFFFF. However, dumping the complete memory would take many hours, so it is impractical.
 
@@ -220,27 +272,28 @@ The program code (`.text`) and constant variables (`.rodata`) are typically stor
 --->
 Now return to the Debug Console while the debugging session is active. 
 
+**Notice**: To run GDB commands from the debug terminal we need to append *-exec* to the beginning
 During the dumping process, you may see errors. Just ignore them.
 
 Dump data in external memory, which shall include all data of the firmware:
-```
-dump binary memory rodata.bin 0x3f400000 0x3fbfffff
+```sh
+-exec dump binary memory rodata.bin 0x3f400000 0x3fbfffff
 ```
 
 Dump data in embedded memory:
-```
-dump binary memory ram.bin 0x3ff80000 0x3fffffff
+```sh
+-exec dump binary memory ram.bin 0x3ff80000 0x3fffffff
 ```
 
 Dump the program code:
 
-```
-dump binary memory text.bin 0x400c2000 0x40bfffff
+```sh
+-exec dump binary memory text.bin 0x400c2000 0x40bfffff
 ```
 
-Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a terminal and view the file contents; for example, the following command finds the ssid in the data
+Most likely, the majority of both files will be empty, since this application is small. To confirm that the download succeeded, you can open a *terminal* and view the file contents; for example, the following command finds the ssid in the data
 
-```
+```sh
 strings -n 3 rodata.bin | grep fxw
 ```
 Note: By default, *strings* prints out of sequences of characters that are at least 4 characters long. Use *-n min-len* or *--bytes=min-len* to change the default min-len.
@@ -254,30 +307,30 @@ sudo apt-get install wxhexeditor                        # Install wxhexeditor
 sudo ln -s /usr/bin/wxHexEditor /usr/bin/wxhexeditor    # Create a symbolic to use the lowercase command wxhexeditor
 ```
 
-10. Change Registers
+### Change Registers
 
 We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
 
-```
-set $a8=12345678
+```sh
+-exec set $a8=12345678
 ```
 
 Now print the value of A8, in both hexadecimal and decimal format:
 
-```
-i r a8
+```sh
+-exec i r a8
 ```
 
 You can even modify the instruction pointer using this method:
 
-```
-set $pc=0
+```sh
+-exec set $pc=0
 ```
 
 Now continue the program:
 
-```
-cont
+```sh
+-exec cont
 ```
 
 The program will crash because it tries to execute at address 0x0. However, no instruction exists at this address. To restart the debugger, close it by either typing `quit` in the Debug Console or clicking the red square a the top of the screen, then re-launch the debugger from the `Run and Debug` menu.
@@ -308,7 +361,7 @@ ESP-IDF contains many different example projects. Change your directory into one
 cd $HOME/esp/esp-idf/examples/protocols/mqtt/tcp
 ```
 
-To start GDB and connect to the ESP-PROG, we need to run `idf.py openocd gdb`. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
+To start GDB and connect to the ESP-PROG, we need to run `idf.py gdb`. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
 
 We are going to build the project to satisfy the ELF file requirement. However, we are not going to flash the project to the ESP32. Recall that the firmware we are interested in is already running on the ESP32. Hence, we have no intention of overwriting the firmware that is already present on the ESP32, and it actually does not matter which project we choose to build during this step. In my case, I have chosen to build an MQTT project.
 
@@ -320,13 +373,13 @@ idf.py build
 
 ### Configure gdbinit
 
-You can try to run `idf.py openocd gdb` again, and most likely you will see output similar to the following:
+You can try to run `idf.py gdb` again, and most likely you will see output similar to the following:
 
 ![image](https://user-images.githubusercontent.com/11084018/154603121-c4336640-edfa-46c5-853a-47a6528c0a07.png)
 
 Most notably, we can see that a breakpoint was placed at address 0x400d7130. This is supposedly the address of `app_main` in our script. However, the program will probably never hit the breakpoint, and the debugger will wait forever. This is because we are giving GDB the symbol information from the MQTT ELF file. This includes the address of `app_main`, which will differ from project to project. Therefore, the firmware running on the ESP32 has a different `app_main` address than the firmware we just built.
 
-To solve this issue, we can observe that `idf.py openocd gdb` reads in some initial commands from a file called `gdbinit`, which exists in the `build` directory. For example, in my case, this file exists on the following path: 
+To solve this issue, we can observe that `idf.py gdb` reads in some initial commands from a file called `gdbinit`, which exists in the `build` directory. For example, in my case, this file exists on the following path: 
 
 `$HOME/esp/esp-idf/examples/protocols/mqtt/tcp/build/gdbinit`
 
@@ -367,7 +420,7 @@ Make sure to change the second-to-last line to match the address you received.
 
 ### Enforce gdbinit Integrity
 
-It turns out that running `idf.py openocd gdb` not only reads from `gdbinit` -- it also overwrites it with the default contents shown earlier. This means the changes we just made will be overwritten when we try to run GDB.
+It turns out that running `idf.py gdb` not only reads from `gdbinit` -- it also overwrites it with the default contents shown earlier. This means the changes we just made will be overwritten when we try to run GDB.
 
 Luckily, there is a simple way to fix this. Open a new terminal, change into the `build` directory, and copy `gdbinit` to a new file:
 
@@ -385,7 +438,7 @@ This will continuously copy the contents of `gdbtmp` into `gdbinit`. Now, even w
 
 ### Launch Debugger
 
-Return to the first terminal and run `idf.py openocd gdb` one last time. Hopefully, you should be greeted by a GDB session that successfully hits the breakpoint.
+Return to the first terminal and run `idf.py gdb` one last time. Hopefully, you should be greeted by a GDB session that successfully hits the breakpoint.
 
 At this point, we can perform nearly all of the same debugging commands that were shown before. The only differences are 1) we do not have access to symbol information, and 2) we have hit a breakpoint in `call_start_cpu0` instead of `app_main`. We can still read/write registers and memory, as well as dump the memory contents to a file. We can also disassemble the current function:
 

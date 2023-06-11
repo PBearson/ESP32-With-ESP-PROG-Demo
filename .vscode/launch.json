@@ -5,12 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "preLaunchTask": "preRun",
             "name":           "ESP_OpenOCD",                        // name to refer to config
             "type":           "cppdbg",                             // Type of config
             "request":        "launch",                             // action
             "cwd":            "${workspaceFolder}/build",           // Current Working Directoty (where to base)
             "program":        "${workspaceFolder}/build/esp32-test-01.elf", // Change hello.elf to be project name
-            "miDebuggerPath": "/home/iot/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/", // ESP 4.4 path
+            "miDebuggerPath": "/home/iot/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gdb", // ESP 4.4 path
             "setupCommands": [
                 { 
                     "text":"target remote 127.0.0.1:3333" // How this will locate the openocd degugger 
