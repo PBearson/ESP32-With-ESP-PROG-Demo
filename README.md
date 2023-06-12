@@ -149,86 +149,76 @@ Where # indicates the rest of the line is comment.
 
     To upload the firmware, select the `Flash` task at the bottom of the screen. We will need to select *JTAG* and the appropriate source directory. We can also flash the board with the command listed below.
         
-        <img src="img/Upload.png"> 
+    <img src="img/Upload.png"> 
 
         ```sh
         openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
         ```
-    * If errors occur, hit the **EN** button on the ESP32 (Sometimes the ESP32 halts after an upload)
+    * If errors occur, hit the **EN** button on the ESP32 before starting openocd
 
 ## Debugging
+**Notice**: The following configuration is based on a configuration described by Espressif [in their documentation](https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/DEBUGGING.md) 
+1. Configure the debugger
 
-**Note to Matt (self)**: May want to move to https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/debugging.md
-
-We currently use a version shown at https://www.youtube.com/watch?v=uq93H7T7cOQ
-1. Launch Debugger
-
-   1. To launch the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the *Create a launch.json file* option and configure it using the following options. **Notice** depending on your installation the path to the GDB binary used by esp-idf may change.
+   1. To configure the debugger, navigate to the `Run and Debug` menu by selecting its icon on the left side of the screen. Select the *Create a launch.json file* option and configure it using the following options.
 
     ```conf
     {
         "version": "0.2.0",
         "configurations": [
-            {
-                "preLaunchTask": "preRun",
-                "name":           "ESP_OpenOCD",                        // name to refer to config
-                "type":           "cppdbg",                             // Type of config
-                "request":        "launch",                             // action
-                "cwd":            "${workspaceFolder}/build",           // Current Working Directoty (where to base)
-                "program":        "${workspaceFolder}/build/esp32-test-01.elf", // Change hello.elf to be project name
-                "miDebuggerPath": "/home/iot/.espressif/tools/xtensa-esp32-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32-elf/bin/xtensa-esp32-elf-gdb", // ESP 4.4 path
-                "setupCommands": [
-                    { 
-                        "text":"target remote 127.0.0.1:3333" // How this will locate the openocd degugger 
-                    },
-                    { 
-                        "text": "set remote hardware-watchpoint-limit 2" // Set hardware breakpoint limit Look at docs for the limit
-                    },
-                    {
-                        "text": "monitor reset halt"
-                    },
-                    {
-                        "text": "flushregs" // Flush internal cache 
-                    }
-
-                ]
-            }
-
-        ]
-    }
-    ```
-    2. In ``` .vscode ``` create a new file ``` tasks.json ``` and fill it in the the following 
-    ```conf
-    { 
-        "version": "2.0.0.",
-        "tasks": 
-        [ 
-            {
-                "label":"preRun",
-                "type":"shell",
-                "linux": {
-                    // Add -c \"set ESP_RTOS none\"  if there are inconsistancies (VSCode fails to keep track of threads sometimes)
-                    "command": "clear & start openocd -c \"set ESP_RTOS none\" -f board/esp32-wrover-kit-3.3v.cfg & exit"
+        {
+            "name": "ESP_OpenOCD",
+            "type": "cppdbg",
+            "request": "launch",
+            "MIMode": "gdb",
+            "miDebuggerPath": "${command:espIdf.getXtensaGdb}",
+            "program": "${workspaceFolder}/build/${command:espIdf.getProjectName}.elf",
+            "windows": { // If windows is used override with the correct path
+                "program": "${workspaceFolder}\\build\\${command:espIdf.getProjectName}.elf"
+            },
+            "cwd": "${workspaceFolder}",
+            "environment": [{ "name": "PATH", "value": "${config:idf.customExtraPaths}" }],
+            "setupCommands": [
+            { "text": "target remote :3333" },
+            { "text": "set remote hardware-watchpoint-limit 2"},
+            { "text": "mon reset halt" },
+            { "text": "thb app_main" }, // This does not appear to do anything
+            { "text": "flushregs" }
+            ],
+            "externalConsole": false, // Use VSCode internal Terminal
+            "logging": { // Disable some logging messages, to make it easier to see program output in debug console
+                "exceptions": true,
+                "programOutput": true,
+                "engineLogging": false,
+                "moduleLoad": false,
+                "threadExit": false,
+                "processExit": false
                 }
             }
         ]
     }
-
     ```
-    3. Set Breakpoints 
-        * With the main program open ``` main/main.c ``` on the left hand side of the screen set a breakpoint at the *for loop* as shown below (left click) and at the start of *app_main*.
+2. Set Breakpoints 
+    * With the main program open ``` main/main.c ``` on the left hand side of the screen set a breakpoint at the *for loop* as shown below (left click) and at the start of *app_main*.
         <img src="setBP.png">
-    4. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
-        * If errors occur, hit the **EN** button on the ESP32 (Sometimes the ESP32 halts after an upload)
+3. Launch to *openocd* program in an esp-idf terminal, with the ```esp32-wrover-kit-3.3v.cfg``` configuration
+    * This can be done using the *esp-idf* terminal button at the bottom of the vscode window, or opening a terminal and using the *export.sh* script described in pervious labs
+        ```sh
+            openocd -f board/esp32-wrover-kit-3.3v.cfg
+        ```
+    * **Note**: Should the debugging session regularly fail, we can add the flag ``` -c \"set ESP_RTOS none\" ```. This is because VSCode may not be able to track every task ongoing in the esp32. This was described in a [walk through video](https://youtu.be/uq93H7T7cOQ) *They use a slightly different launch configuration*.
+4. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
+    * If errors occur, hit the **EN** button on the ESP32 before starting openocd
 <img src="img/Run-and-Debug.png">
-
-    Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint at the main function of our application (`app_main`). We added this breakpoint when we clicker on the left hand margin of the line containing ```void app_main()``` and created the red dot. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
+ 
+    Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint at the main function of our application (`app_main`). We added this breakpoint when we clicked on the left hand margin of the line containing ```void app_main()``` and created the red dot signifying a break point. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
 
     <img src="img/Debug-Console.png"> 
 
 
 ### Change Memory
-**Since GDB is used for debugging, we can enter GDB commands in the debug console**. This is possible with the **-exec** flag.
+**Since GDB is used for debugging, we can enter GDB commands in the debug console**. 
+**Note**: This is possible with the use of an **-exec** flag preceding the command.
 
 Click and open the source code file `main.c`. This file contains the code that is currently being run by the debugger (when we ran the build task, we compiled this code into a binary image, and the upload task programmed that binary image into the ESP32). Scroll down in the file until you see the following *for* loop: 
 
@@ -312,13 +302,13 @@ sudo ln -s /usr/bin/wxHexEditor /usr/bin/wxhexeditor    # Create a symbolic to u
 We can also use JTAG and GDB to modify our program. For example, we can modify the register values in the CPU. Set the register A8 to 12345678:
 
 ```sh
--exec set $a8=12345678
+-exec set $ar8=12345678
 ```
 
 Now print the value of A8, in both hexadecimal and decimal format:
 
 ```sh
--exec i r a8
+-exec i r ar8
 ```
 
 You can even modify the instruction pointer using this method:
