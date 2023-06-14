@@ -124,11 +124,9 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
 
 
 1. Clone this GitHub project within a folder at the Ubuntu VM.
-For example, the following commands in a terminal clone the GitHub project to /home/iot/Documents
-```
-cd ~/Documents                                                          # change to the folder Documents within the home folder
-rm -rf ESP32-With-ESP-PROG-Demo                                         # delete the old folder of this project if needed
-git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
+    **Note**: By default, this project is already located in the ``` ~/esp/IoT-Examples/ ``` directory of the Ubuntu VM.
+    ```
+    git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
 ```
 Where # indicates the rest of the line is comment.
 
