@@ -144,15 +144,18 @@ Where # indicates the rest of the line is comment.
     A terminal will open, and you will see the output from the build task. After a few minutes, the build will finish.
 
 3. Upload Firmware
-
-    To upload the firmware, select the `Flash` task at the bottom of the screen. We will need to select *JTAG* and the appropriate source directory. We can also flash the board with the command listed below.
-        
-    <img src="img/Upload.png"> 
-
-        ```sh
-        openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+    * First change to flash mode to JTAG
+        <img src="img/Set-JTAG.png"
+    * (If using the VS Code method) start openocd 
         ```
-    * If errors occur, hit the **EN** button on the ESP32 before starting openocd
+            openocd -f board/esp32-wrover-kit-3.3v.cfg
+        ```
+    * To upload the firmware, select the `Flash` task at the bottom of the screen. We can also flash the board with the command listed below.
+        <img src="img/Upload.png"> 
+            ```sh
+            openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
+            ```
+    * If errors occur, hit the **EN** button on the ESP32 before starting openocd/flash
 
 ## Debugging
 **Notice**: The following configuration is based on a configuration described by Espressif [in their documentation](https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/DEBUGGING.md) 
@@ -204,13 +207,13 @@ Where # indicates the rest of the line is comment.
         ```sh
             openocd -f board/esp32-wrover-kit-3.3v.cfg
         ```
+        <img src="img/OpenOCD-Debug-Console.png">
     * **Note**: Should the debugging session regularly fail, we can add the flag ``` -c \"set ESP_RTOS none\" ```. This is because VSCode may not be able to track every task ongoing in the esp32. This was described in a [walk through video](https://youtu.be/uq93H7T7cOQ) *They use a slightly different launch configuration*.
 4. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
     * If errors occur, hit the **EN** button on the ESP32 before starting openocd
     <img src="img/Run-and-Debug.png">
- 
+    
     Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint at the main function of our application (`app_main`). We added this breakpoint when we clicked on the left hand margin of the line containing ```void app_main()``` and created the red dot signifying a break point. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
-
     <img src="img/Debug-Console.png"> 
 
 
