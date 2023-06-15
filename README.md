@@ -207,7 +207,7 @@ Where # indicates the rest of the line is comment.
     * **Note**: Should the debugging session regularly fail, we can add the flag ``` -c \"set ESP_RTOS none\" ```. This is because VSCode may not be able to track every task ongoing in the esp32. This was described in a [walk through video](https://youtu.be/uq93H7T7cOQ) *They use a slightly different launch configuration*.
 4. Launch the debugging job, open the drop down menu and select *ESP_OpenOCD*
     * If errors occur, hit the **EN** button on the ESP32 before starting openocd
-<img src="img/Run-and-Debug.png">
+    <img src="img/Run-and-Debug.png">
  
     Switch to the Debug Console. After a few seconds, OpenOCD will launch a **GDB** session and you will hit a temporary breakpoint at the main function of our application (`app_main`). We added this breakpoint when we clicked on the left hand margin of the line containing ```void app_main()``` and created the red dot signifying a break point. At the top of the screen, you will see some new buttons have appeared, which are used for controlling the program in the debug state. We will use the Debug Console or those buttons for our debugging tasks.
 

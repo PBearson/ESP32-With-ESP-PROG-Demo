@@ -108,19 +108,22 @@ void app_main()
     gpio_reset_pin(BLINK_GPIO);
     // Set Direction 
     gpio_set_direction(BLINK_GPIO, GPIO_MODE_OUTPUT);
-
+    // LED on
+    gpio_set_level(BLINK_GPIO, 1);
 
     for (int i = 10; i >= 0; i--) {
-        // LED on
-        gpio_set_level(BLINK_GPIO, 1);
+
         // Print to serial
         printf("Behold in %d seconds...\n", i);
         // Delay
         vTaskDelay(1000 / portTICK_PERIOD_MS);
-        // LED off 
-        gpio_set_level(BLINK_GPIO, 0);
+
     }
 
+    // LED off 
+    gpio_set_level(BLINK_GPIO, 0);
+    
+    // Log message and call SoftAP example
     ESP_LOGI(TAG, "ESP_WIFI_MODE_AP");
     wifi_init_softap();
 }
