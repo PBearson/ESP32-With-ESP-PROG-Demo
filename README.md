@@ -22,24 +22,9 @@ The ESP32 supports the JTAG debugging interface, which can allow users to debug 
 
 See below for a look at how the Hiletgo ESP-WROOM-32 board may connect to ESP-PROG:
 
-<img src="img/Base-JTAG.png"> 
+<img src="img/ESP-PROG.jpg"> 
 
-The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device and security implications of a JTAG interface on an IoT device. We will use Visual Studio Code and PlatformIO, which is a software plugin that enables app development on numerous IoT microcontrollers such as ESP32. Using VSCode and PlatformIO, we will download the project in this GitHub repository, load it into VS Code, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
-
-<!---
-## Prerequisites
-
-Download the Ubuntu VM, which already has VSCode and PlatformIO installed: https://www.dropbox.com/s/0g7w8qduzj2rb1k/UbuntuIoT.ova?dl=0
-
-Import the VM into VirtualBox and launch it. The default username is `iot`. The password is `toi`.
-
-The debugging software has a dependency on libpython2.7.so.1.0, so we need to install it if needed. Open a terminal and run the following commands:
-
-```
-sudo apt update
-sudo apt install libpython2.7
-```
---->
+The purpose of this project is to show users how to pair the ESP-WROOM-32 development board with the ESP-PROG device and security implications of a JTAG interface on an IoT device. We will use Visual Studio Code and ESP-IDF, which is a software development framework that enables app development on numerous Espressif IoT microcontrollers such as ESP32. Using VSCode and the ESP-IDF extension, we will download the project in this GitHub repository, load it into VS Code, compile it, upload it, and perform some debugging all through the ESP-PROG debugger board.
 
 ## Lab Setup
 1. Hardware Setup
@@ -123,7 +108,7 @@ To connect the devices to your host computer, you can connect the ESP-PROG to th
     The USB controller may also be named **Future Devices Dual RS232-HS**
 
 
-1. Clone this GitHub project within a folder at the Ubuntu VM.
+3. Clone this GitHub project within a folder at the Ubuntu VM.
     **Note**: By default, this project is already located in the ``` ~/esp/IoT-Examples/ ``` directory of the Ubuntu VM.
     ```
     git clone https://github.com/PBearson/ESP32-With-ESP-PROG-Demo.git      # clone the github repository
@@ -148,14 +133,18 @@ Where # indicates the rest of the line is comment.
         <img src="img/Set-JTAG.png"
     * (If using the VS Code method) start openocd 
         ```
+            # Manual mode
             openocd -f board/esp32-wrover-kit-3.3v.cfg
+
+            # Or from the project directory
+            idf.py openocd
         ```
     * To upload the firmware, select the `Flash` task at the bottom of the screen. We can also flash the board with the command listed below.
         <img src="img/Upload.png"> 
             ```sh
             openocd -f board/esp32-wrover-kit-3.3v.cfg -c "program_esp build/hello-world.bin 0x10000 verify exit"
             ```
-    * If errors occur, hit the **EN** button on the ESP32 before starting openocd/flash
+    * If errors occur, hit the **EN** button on the ESP32 before starting openocd/flashing
 
 ## Debugging
 **Notice**: The following configuration is based on a configuration described by Espressif [in their documentation](https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/DEBUGGING.md) 
@@ -225,7 +214,7 @@ Click and open the source code file `main.c`. This file contains the code that i
 
 <img src="img/Breakpoint.png">
 
-To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and a red dot representing the breakpoint shall show up. Then presess the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
+To show an example of how to modify memory, we are going to enter this loop and change the `i` variable. First, place a breakpoint at the beginning of the loop (line 83) by clicking at the left end of the line and a red dot representing the breakpoint shall show up. Then press the *Continue* button. Alternatively, enter the following two commands in the debug console to achieve the same result.
 
 ```sh
 -exec hb 83
@@ -344,6 +333,8 @@ echo ". $HOME/esp/esp-idf/export.sh" >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
 
+**Note** We have already created an alias *set-esp* and *set-esp-console* that can be used to run the export script on demand.
+
 ### Build a Sample Project
 
 ESP-IDF contains many different example projects. Change your directory into one of these sample projects. For example:
@@ -352,7 +343,7 @@ ESP-IDF contains many different example projects. Change your directory into one
 cd $HOME/esp/esp-idf/examples/protocols/mqtt/tcp
 ```
 
-To start GDB and connect to the ESP-PROG, we need to run `idf.py gdb`. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
+To start GDB and connect to the ESP-PROG, we need to run `idf.py gdb`.The openocd server should already have been stated in another terminal using ```idf.py openocd```. However, you will see that this script prints out an error: "ELF file not found. You need to build & flash the project before running debug targets".
 
 We are going to build the project to satisfy the ELF file requirement. However, we are not going to flash the project to the ESP32. Recall that the firmware we are interested in is already running on the ESP32. Hence, we have no intention of overwriting the firmware that is already present on the ESP32, and it actually does not matter which project we choose to build during this step. In my case, I have chosen to build an MQTT project.
 
@@ -387,7 +378,7 @@ c
 
 This file loads the ELF file of our project, giving GDB access to its symbols. It also places a breakpoint at `app_main`. Of course, we know that this breakpoint is basically worthless, since the program never reaches it. We need to modify `gdbinit` so that it inserts a breakpoint in a better location and it doesn't load the erroneous symbol information.
 
-We do not have access to the symbol information of the running firmware, so we have to estimate where the breakpoint should be inserted. One option is to place a breakpoint at `call_start_cpu0`, which is the entry point of each firmware image. Based on my experience, the address of this function will not change unless we modify the bootloader or partition table. In this case, the MQTT project uses the same bootlaoder and partition table as the firmware running on the ESP32, so the address of `call_start_cpu0` should also be the same. This logic will not work for every project, but it is good enough for now.
+We do not have access to the symbol information of the running firmware, so we have to estimate where the breakpoint should be inserted. One option is to place a breakpoint at `call_start_cpu0`, which is the entry point of each firmware image. Based on my experience, the address of this function will not change unless we modify the bootloader or partition table. In this case, the MQTT project uses the same bootloader and partition table as the firmware running on the ESP32, so the address of `call_start_cpu0` should also be the same. This logic will not work for every project, but it is good enough for now.
 
 To find the address of `call_start_cpu0` in the MQTT project, run the following:
 
