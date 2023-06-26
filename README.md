@@ -491,3 +491,9 @@ Here are a couple other useful commands you should know about:
 * To view the stack frame details, run `i f`. This provides information on the current function, arguments, local variables, etc.
 * To view the backtrace of the call stack, type `bt`.
 * To view registers, type `i r`.
+
+
+### Additional GDB options
+Espressif provides additional methods of starting GDB with extra functionality. This is described at their [JTAG Debugging page](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/using-debugger.html).
+
+We can utilize the command  ```idf.py gdbtui``` without any additional configurations.
